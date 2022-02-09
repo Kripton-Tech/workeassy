@@ -20,6 +20,12 @@
                         <span class="hide-menu">Approch Towards</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Request::is('about*') ? 'selected' : '' }}">
+                    <a class="sidebar-link {{ Request::is('about*') ? 'active' : '' }}" href="{{ route('admin.about') }}" aria-expanded="false">
+                        <i class="fas fa-exclamation"></i>
+                        <span class="hide-menu">About Sections</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('video*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('video*') ? 'active' : '' }}" href="{{ route('admin.video') }}" aria-expanded="false">
                         <i class="fas fa-play"></i>

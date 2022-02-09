@@ -21,7 +21,7 @@ class TowardController extends Controller{
                                         END as image"), 
                                         'status'
                                     )
-                                ->orderBy('id')
+                                ->orderBy('id', 'desc')
                                 ->get();
 
                 return Datatables::of($data)

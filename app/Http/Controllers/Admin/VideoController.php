@@ -12,7 +12,7 @@ class VideoController extends Controller{
     /** index */
         public function index(Request $request){
             if($request->ajax()){
-                $data = Video::select('id', DB::Raw("CONCAT(SUBSTRING(".'link'.", 1, 30), '...') as link"), 'status')->orderBy('id')->get();
+                $data = Video::select('id', DB::Raw("CONCAT(SUBSTRING(".'link'.", 1, 30), '...') as link"), 'status')->orderBy('id', 'desc')->get();
 
                 return Datatables::of($data)
                         ->addIndexColumn()

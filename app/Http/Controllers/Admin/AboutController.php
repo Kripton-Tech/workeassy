@@ -4,17 +4,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\Slider;
-use App\Http\Requests\SliderRequest;
+use App\Models\About;
+use App\Http\Requests\AboutRequest;
 use Auth, DB, Mail, Validator, File, DataTables;
 
-class SliderController extends Controller{
+class AboutController extends Controller{
     /** index */
         public function index(Request $request){
             if($request->ajax()){
-                $path = URL('/uploads/slider/').'/';
+                $path = URL('/uploads/about/').'/';
 
-                $data = Slider::select('id', 'title', 
+                $data = About::select('id', 'title', 
+                                        DB::Raw("CONCAT(SUBSTRING(".'description'.", 1, 30), '...') as description"),
                                         DB::Raw("CASE
                                             WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
                                             ELSE 'default.png'
@@ -28,10 +29,10 @@ class SliderController extends Controller{
                         ->addIndexColumn()
                         ->addColumn('action', function($data){
                             return ' <div class="btn-group">
-                                            <a href="'.route('admin.slider.view', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
+                                            <a href="'.route('admin.about.view', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
                                                 <i class="fa fa-eye"></i>
                                             </a> &nbsp;
-                                            <a href="'.route('admin.slider.edit', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
+                                            <a href="'.route('admin.about.edit', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
                                                 <i class="fa fa-edit"></i>
                                             </a> &nbsp;
                                             <a href="javascript:;" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -55,7 +56,7 @@ class SliderController extends Controller{
                         })
 
                         ->editColumn('image', function($data) {
-                            return "<img src=".$data->image." alt='slider' class='' width='50'>";
+                            return "<img src=".$data->image." alt='about' class='' width='50'>";
                         })
 
 
@@ -63,30 +64,31 @@ class SliderController extends Controller{
                         ->make(true);
             }
 
-            return view('admin.slider.index');
+            return view('admin.about.index');
         }
     /** index */
 
     /** create */
         public function create(Request $request){
-            return view('admin.slider.create');
+            return view('admin.about.create');
         }
     /** create */
 
     /** insert */
-        public function insert(SliderRequest $request){
+        public function insert(AboutRequest $request){
             if($request->ajax()){ return true; }
 
             if(!empty($request->all())){
                 $crud = [
                     'title' => ucfirst($request->title),
+                    'description' => $request->description,
                     'created_at' => date('Y-m-d H:i:s'),
                     'created_by' => auth()->user()->id,
                     'updated_at' => date('Y-m-d H:i:s'),
                     'updated_by' => auth()->user()->id
                 ];
 
-                $folder_to_upload = public_path().'/uploads/slider/';
+                $folder_to_upload = public_path().'/uploads/about/';
                 
                 if (!File::exists($folder_to_upload))
                     File::makeDirectory($folder_to_upload, 0777, true, true);
@@ -103,18 +105,18 @@ class SliderController extends Controller{
                     $crud["image"] = 'default.png';
                 }
 
-                $last_id = Slider::insertGetId($crud);
+                $last_id = About::insertGetId($crud);
 
                 if($last_id){
                     if(!empty($request->image))
                         $file->move($folder_to_upload, $filenameToStore);
                     
-                    return redirect()->route('admin.slider')->with('success', 'Record inserted successfully');
+                    return redirect()->route('admin.about')->with('success', 'Record inserted successfully');
                 }else{
                     return redirect()->back()->with('error', 'Faild to insert record')->withInput();
                 }
             }else{
-                return redirect()->route('admin.slider')->with('error', 'Something went wrong');
+                return redirect()->route('admin.about')->with('error', 'Something went wrong');
             }
         }
     /** insert */
@@ -122,12 +124,12 @@ class SliderController extends Controller{
     /** view */
         public function view(Request $request, $id=''){
             if($id == '')
-                return redirect()->route('admin.slider')->with('error', 'Something went wrong');
+                return redirect()->route('admin.about')->with('error', 'Something went wrong');
 
             $id = base64_decode($id);
-            $path = URL('/uploads/slider/').'/';
+            $path = URL('/uploads/about/').'/';
 
-            $data = Slider::select('id', 'title', 
+            $data = About::select('id', 'title', 'description',
                                         DB::Raw("CASE
                                             WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
                                             ELSE 'default.png'
@@ -136,21 +138,21 @@ class SliderController extends Controller{
                                     ->where(['id' => $id])->first();
             
             if($data)
-                return view('admin.slider.view')->with(['data' => $data]);
+                return view('admin.about.view')->with(['data' => $data]);
             else
-                return redirect()->route('admin.slider')->with('error', 'No data found');
+                return redirect()->route('admin.about')->with('error', 'No data found');
         }
     /** view */
 
     /** edit */
         public function edit(Request $request, $id=''){
             if($id == '')
-                return redirect()->route('admin.slider')->with('error', 'Something went wrong');
+                return redirect()->route('admin.about')->with('error', 'Something went wrong');
 
             $id = base64_decode($id);
-            $path = URL('/uploads/slider/').'/';
+            $path = URL('/uploads/about/').'/';
 
-            $data = Slider::select('id', 'title', 
+            $data = About::select('id', 'title', 'description',
                                         DB::Raw("CASE
                                             WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
                                             ELSE 'default.png'
@@ -159,27 +161,28 @@ class SliderController extends Controller{
                                     ->where(['id' => $id])->first();
             
             if($data)
-                return view('admin.slider.edit')->with(['data' => $data]);
+                return view('admin.about.edit')->with(['data' => $data]);
             else
-                return redirect()->route('admin.slider')->with('error', 'No data found');
+                return redirect()->route('admin.about')->with('error', 'No data found');
         }
     /** edit */ 
 
     /** update */
-        public function update(SliderRequest $request){
+        public function update(AboutRequest $request){
             if($request->ajax()){ return true; }
 
             if(!empty($request->all())){
                 $id = $request->id;
-                $exst_record = Slider::where(['id' => $id])->first();
+                $exst_record = About::where(['id' => $id])->first();
 
                 $crud = [
                     'title' => ucfirst($request->title),
+                    'description' => $request->description,
                     'updated_at' => date('Y-m-d H:i:s'),
                     'updated_by' => auth()->user()->id
                 ];
 
-                $folder_to_upload = public_path().'/uploads/slider/';
+                $folder_to_upload = public_path().'/uploads/about/';
                 
                 if (!File::exists($folder_to_upload))
                     File::makeDirectory($folder_to_upload, 0777, true, true);
@@ -196,17 +199,17 @@ class SliderController extends Controller{
                     $crud["image"] = $exst_record->image;
                 }
                 
-                $update = Slider::where(['id' => $id])->update($crud);
+                $update = About::where(['id' => $id])->update($crud);
 
                 if($update){
                     if(!empty($request->image)){
                         $file->move($folder_to_upload, $filenameToStore);
 
-                        $path = public_path()."/uploads/slider/".$exst_record->image;
+                        $path = public_path()."/uploads/about/".$exst_record->image;
                         @unlink($path);
                     }
 
-                    return redirect()->route('admin.slider')->with('success', 'Record updated successfully');
+                    return redirect()->route('admin.about')->with('success', 'Record updated successfully');
                 }else{
                     return redirect()->back()->with('error', 'Faild to updated record')->withInput();
                 }
@@ -224,16 +227,16 @@ class SliderController extends Controller{
                 $id = base64_decode($request->id);
                 $status = $request->status;
 
-                $data = Slider::where(['id' => $id])->first();
+                $data = About::where(['id' => $id])->first();
 
                 if(!empty($data)){
                     if($status == 'delete'){
-                        $update = Slider::where(['id' => $id])->delete();
+                        $update = About::where(['id' => $id])->delete();
 
-                        $path = public_path()."/uploads/slider/".$data->image;
+                        $path = public_path()."/uploads/about/".$data->image;
                         @unlink($path);
                     }else{
-                        $update = Slider::where(['id' => $id])->update(['status' => $status, 'updated_at' => date('Y-m-d H:i:s'), 'updated_by' => auth()->user()->id]);
+                        $update = About::where(['id' => $id])->update(['status' => $status, 'updated_at' => date('Y-m-d H:i:s'), 'updated_by' => auth()->user()->id]);
                     }
                     
                     if($update)
