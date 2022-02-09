@@ -16,7 +16,7 @@
     <link href="{{ asset('backend/assets/dist/css/style.min.css') }}" rel="stylesheet" />
 
     <style>
-        .logo{ max-width:80px; }
+        .logo{ max-width:100px; }
     </style>
 
     @yield('styles')
