@@ -5,30 +5,61 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
-// use App\Models\Category;
-// use App\Models\Portfolio;
+use App\Models\Slider;
+use App\Models\Workspace;
+use App\Models\Video;
 use App\Http\Requests\ContactRequest;
 use DB, Mail;
 use Carbon\Carbon;
 
 class RootController extends Controller{
     public function index(Request $request){
-        // $categories = Category::select('id', 'title')->where(['status' => 'active'])->get();
+        $slider_path = URL('uploads/slider').'/';
+        $sliders = Slider::select('id', 'title',
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$slider_path."'".", ".'image'.")
+                                            ELSE CONCAT("."'".$slider_path."'".", 'default.png')
+                                        END as image")
+                                    )
+                                ->where(['status' => 'active'])
+                                ->get();
 
-        // $path = URL('uploads/portfolio').'/';
-        // $portfolios = DB::table('portfolios as p')
-        //                     ->select('p.id', 'p.category_id', 'p.title', 'c.title as category_title',
-        //                                 DB::Raw("CASE
-        //                                     WHEN ".'p.image'." != '' THEN CONCAT("."'".$path."'".", ".'p.image'.")
-        //                                     ELSE CONCAT("."'".$path."'".", 'default.png')
-        //                                 END as image")
-        //                             )
-        //                     ->leftjoin('categories as c', 'c.id', 'p.category_id')
-        //                     ->where(['p.status' => 'active'])
-        //                     ->get();
+        $option_path = URL('uploads/workspace').'/';
+        $options = Workspace::select('id', 'title', DB::Raw("CONCAT(SUBSTRING(".'description'.", 1, 100), '...') as description"),
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$option_path."'".", ".'image'.")
+                                            ELSE CONCAT("."'".$option_path."'".", 'default.png')
+                                        END as image")
+                                    )
+                                ->where(['status' => 'active'])
+                                ->get();
 
-        // return view('front.index')->with(['categories' => $categories, 'portfolios' => $portfolios]);
-        return view('front.index');
+        $links = Video::select('link')->where(['status' => 'active'])->get();
+
+        return view('front.index')->with(['sliders' => $sliders, 'options' => $options, 'links' => $links]);
+    }
+
+    public function option(Request $request, $id=""){
+        if($id == '')
+            return redirec()->back();
+
+        $id = base64_decode($id);
+
+        $path = URL('uploads/workspace').'/';
+        $data = Workspace::select('id', 'title', 'sub_title', 'description',
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
+                                            ELSE CONCAT("."'".$path."'".", 'default.png')
+                                        END as image"),
+                                        DB::Raw("CASE
+                                            WHEN ".'cover_image'." != '' THEN CONCAT("."'".$path."'".", ".'cover_image'.")
+                                            ELSE CONCAT("."'".$path."'".", 'default.png')
+                                        END as cover_image")
+                                    )
+                                ->where(['id' => $id])
+                                ->first();
+
+        return view('front.option')->with(['data' => $data]);
     }
 
     public function about(Request $request){
