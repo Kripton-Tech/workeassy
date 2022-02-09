@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
 class AboutSeeder extends Seeder{
-
     public function run(){
         $file_to_upload = public_path().'/uploads/about/';
         if (!File::exists($file_to_upload))

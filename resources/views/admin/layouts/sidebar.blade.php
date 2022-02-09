@@ -26,6 +26,12 @@
                         <span class="hide-menu">About Sections</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Request::is('blog*') ? 'selected' : '' }}">
+                    <a class="sidebar-link {{ Request::is('blog*') ? 'active' : '' }}" href="{{ route('admin.blog') }}" aria-expanded="false">
+                        <i class="fas fa-bell-o"></i>
+                        <span class="hide-menu">Blogs</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('video*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('video*') ? 'active' : '' }}" href="{{ route('admin.video') }}" aria-expanded="false">
                         <i class="fas fa-play"></i>

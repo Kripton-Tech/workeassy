@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder{
             TowardSeeder::class,
             VideoSeeder::class,
             AboutSeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

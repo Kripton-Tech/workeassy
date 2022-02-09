@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
 class UserSeeder extends Seeder{
-
     public function run(){
         $admin = User::create([
             'name' => 'Super Admin',

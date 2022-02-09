@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
 class VideoSeeder extends Seeder{
-
     public function run(){
         $data = [
                     'https://www.youtube.com/embed/Y5BRCzZ6Ro0?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1&origin=https%3A%2F%2Fworkeasy.in&widgetid=1',
