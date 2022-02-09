@@ -4,25 +4,33 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\Portfolio;
-use App\Models\Category;
-use App\Http\Requests\PortfolioRequest;
+use App\Models\Slider;
+use App\Http\Requests\SliderRequest;
 use Auth, DB, Mail, Validator, File, DataTables;
 
-class PortfolioController extends Controller{
+class SliderController extends Controller{
     /** index */
         public function index(Request $request){
             if($request->ajax()){
-                $data = Portfolio::select('id', 'category_id', 'title', 'image')->orderBy('id','desc')->get();
+                $path = URL('/uploads/slider/').'/';
+
+                $data = Slider::select('id', 'title', 
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
+                                            ELSE 'default.png'
+                                        END as image")
+                                    )
+                                ->orderBy('id','desc')
+                                ->get();
 
                 return Datatables::of($data)
                         ->addIndexColumn()
                         ->addColumn('action', function($data){
                             return ' <div class="btn-group">
-                                            <a href="'.route('admin.portfolio.view', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
+                                            <a href="'.route('admin.slider.view', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
                                                 <i class="fa fa-eye"></i>
                                             </a> &nbsp;
-                                            <a href="'.route('admin.portfolio.edit', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
+                                            <a href="'.route('admin.slider.edit', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
                                                 <i class="fa fa-edit"></i>
                                             </a> &nbsp;
                                             <a href="javascript:;" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -45,42 +53,31 @@ class PortfolioController extends Controller{
                                 return '-';
                         })
 
-                        ->editColumn('category_id', function($data) {
-                            if($data->category_id != ''){
-                                $category = Category::select('title')->where(['id' => $data->category_id])->first();
-
-                                if($category)
-                                    return $category->title;
-                                else
-                                    return '';
-                            }else{
-                                return '';
-                            }
+                        ->editColumn('image', function($data) {
+                            return "<img src=".$data->image." alt='slider' class='' width='50'>";
                         })
 
-                        ->rawColumns(['action', 'status', 'category_id'])
+
+                        ->rawColumns(['action', 'status', 'image'])
                         ->make(true);
             }
 
-            return view('admin.portfolios.index');
+            return view('admin.slider.index');
         }
     /** index */
 
     /** create */
         public function create(Request $request){
-            $categories = Category::select('id', 'title')->where(['status' => 'active'])->get();
-
-            return view('admin.portfolios.create')->with(['categories' => $categories]);
+            return view('admin.slider.create');
         }
     /** create */
 
     /** insert */
-        public function insert(PortfolioRequest $request){
+        public function insert(SliderRequest $request){
             if($request->ajax()){ return true; }
 
             if(!empty($request->all())){
                 $crud = [
-                    'category_id' => $request->category_id,
                     'title' => ucfirst($request->title),
                     'created_at' => date('Y-m-d H:i:s'),
                     'created_by' => auth()->user()->id,
@@ -88,7 +85,7 @@ class PortfolioController extends Controller{
                     'updated_by' => auth()->user()->id
                 ];
 
-                $folder_to_upload = public_path().'/uploads/portfolio/';
+                $folder_to_upload = public_path().'/uploads/slider/';
                 
                 if (!File::exists($folder_to_upload))
                     File::makeDirectory($folder_to_upload, 0777, true, true);
@@ -105,18 +102,18 @@ class PortfolioController extends Controller{
                     $crud["image"] = 'default.png';
                 }
 
-                $last_id = Portfolio::insertGetId($crud);
+                $last_id = Slider::insertGetId($crud);
 
                 if($last_id){
                     if(!empty($request->image))
                         $file->move($folder_to_upload, $filenameToStore);
                     
-                    return redirect()->route('admin.portfolio')->with('success', 'Record inserted successfully');
+                    return redirect()->route('admin.slider')->with('success', 'Record inserted successfully');
                 }else{
                     return redirect()->back()->with('error', 'Faild to insert record')->withInput();
                 }
             }else{
-                return redirect()->route('admin.portfolio')->with('error', 'Something went wrong');
+                return redirect()->route('admin.slider')->with('error', 'Something went wrong');
             }
         }
     /** insert */
@@ -124,13 +121,12 @@ class PortfolioController extends Controller{
     /** view */
         public function view(Request $request, $id=''){
             if($id == '')
-                return redirect()->route('admin.portfolio')->with('error', 'Something went wrong');
+                return redirect()->route('admin.slider')->with('error', 'Something went wrong');
 
             $id = base64_decode($id);
-            $path = URL('/uploads/portfolio/').'/';
+            $path = URL('/uploads/slider/').'/';
 
-            $categories = Category::select('id', 'title')->where(['status' => 'active'])->get();
-            $data = Portfolio::select('id', 'category_id', 'title', 
+            $data = Slider::select('id', 'title', 
                                         DB::Raw("CASE
                                             WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
                                             ELSE 'default.png'
@@ -139,22 +135,21 @@ class PortfolioController extends Controller{
                                     ->where(['id' => $id])->first();
             
             if($data)
-                return view('admin.portfolios.view')->with(['data' => $data, 'categories' => $categories]);
+                return view('admin.slider.view')->with(['data' => $data]);
             else
-                return redirect()->route('admin.portfolio')->with('error', 'No data found');
+                return redirect()->route('admin.slider')->with('error', 'No data found');
         }
     /** view */
 
     /** edit */
         public function edit(Request $request, $id=''){
             if($id == '')
-                return redirect()->route('admin.portfolio')->with('error', 'Something went wrong');
+                return redirect()->route('admin.slider')->with('error', 'Something went wrong');
 
             $id = base64_decode($id);
-            $path = URL('/uploads/portfolio/').'/';
+            $path = URL('/uploads/slider/').'/';
 
-            $categories = Category::select('id', 'title')->where(['status' => 'active'])->get();
-            $data = Portfolio::select('id', 'category_id', 'title', 
+            $data = Slider::select('id', 'title', 
                                         DB::Raw("CASE
                                             WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
                                             ELSE 'default.png'
@@ -163,28 +158,27 @@ class PortfolioController extends Controller{
                                     ->where(['id' => $id])->first();
             
             if($data)
-                return view('admin.portfolios.edit')->with(['data' => $data, 'categories' => $categories]);
+                return view('admin.slider.edit')->with(['data' => $data]);
             else
-                return redirect()->route('admin.portfolio')->with('error', 'No data found');
+                return redirect()->route('admin.slider')->with('error', 'No data found');
         }
     /** edit */ 
 
     /** update */
-        public function update(PortfolioRequest $request){
+        public function update(SliderRequest $request){
             if($request->ajax()){ return true; }
 
             if(!empty($request->all())){
                 $id = $request->id;
-                $exst_record = Portfolio::where(['id' => $id])->first();
+                $exst_record = Slider::where(['id' => $id])->first();
 
                 $crud = [
-                    'category_id' => $request->category_id,
                     'title' => ucfirst($request->title),
                     'updated_at' => date('Y-m-d H:i:s'),
                     'updated_by' => auth()->user()->id
                 ];
 
-                $folder_to_upload = public_path().'/uploads/portfolio/';
+                $folder_to_upload = public_path().'/uploads/slider/';
                 
                 if (!File::exists($folder_to_upload))
                     File::makeDirectory($folder_to_upload, 0777, true, true);
@@ -201,14 +195,17 @@ class PortfolioController extends Controller{
                     $crud["image"] = $exst_record->image;
                 }
                 
-                $update = Portfolio::where(['id' => $id])->update($crud);
+                $update = Slider::where(['id' => $id])->update($crud);
 
                 if($update){
                     if(!empty($request->image)){
                         $file->move($folder_to_upload, $filenameToStore);
+
+                        $path = public_path()."/uploads/slider/".$exst_record->image;
+                        @unlink($path);
                     }
 
-                    return redirect()->route('admin.portfolio')->with('success', 'Record updated successfully');
+                    return redirect()->route('admin.slider')->with('success', 'Record updated successfully');
                 }else{
                     return redirect()->back()->with('error', 'Faild to updated record')->withInput();
                 }
@@ -226,13 +223,17 @@ class PortfolioController extends Controller{
                 $id = base64_decode($request->id);
                 $status = $request->status;
 
-                $data = Portfolio::where(['id' => $id])->first();
+                $data = Slider::where(['id' => $id])->first();
 
                 if(!empty($data)){
-                    if($status == 'delete')
-                        $update = Portfolio::where(['id' => $id])->delete();
-                    else
-                        $update = Portfolio::where(['id' => $id])->update(['status' => $status, 'updated_at' => date('Y-m-d H:i:s'), 'updated_by' => auth()->user()->id]);
+                    if($status == 'delete'){
+                        $update = Slider::where(['id' => $id])->delete();
+
+                        $path = public_path()."/uploads/slider/".$data->image;
+                        @unlink($path);
+                    }else{
+                        $update = Slider::where(['id' => $id])->update(['status' => $status, 'updated_at' => date('Y-m-d H:i:s'), 'updated_by' => auth()->user()->id]);
+                    }
                     
                     if($update)
                         return response()->json(['code' => 200]);

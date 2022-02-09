@@ -8,6 +8,12 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Request::is('slider*') ? 'selected' : '' }}">
+                    <a class="sidebar-link {{ Request::is('slider*') ? 'active' : '' }}" href="{{ route('admin.slider') }}" aria-expanded="false">
+                        <i class="fas fa-file"></i>
+                        <span class="hide-menu">Sliders</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('contact*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('contact*') ? 'active' : '' }}" href="{{ route('admin.contact') }}" aria-expanded="false">
                         <i class="fas fa-id-card"></i>

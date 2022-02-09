@@ -32,7 +32,7 @@ Route::get('command:key', function() {
 });
 
 Route::get('command:migrate', function() {
-    Artisan::call('migrate:refresh');   
+    Artisan::call('migrate:fresh');   
     return "Database migration generated";
 });
 
@@ -64,25 +64,15 @@ Route::group(['middleware' => ['prevent-back-history'], 'prefix' => 'admin', 'na
 
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-        /** categories */
-            // Route::any('categories', 'CategoriesController@index')->name('categories');
-            // Route::get('categories/create', 'CategoriesController@create')->name('categories.create');
-            // Route::post('categories/insert', 'CategoriesController@insert')->name('categories.insert');
-            // Route::get('categories/view/{id?}', 'CategoriesController@view')->name('categories.view');
-            // Route::get('categories/edit/{id?}', 'CategoriesController@edit')->name('categories.edit');
-            // Route::patch('categories/update', 'CategoriesController@update')->name('categories.update');
-            // Route::post('categories/change-status', 'CategoriesController@change_status')->name('categories.change.status');
-        /** categories */
-
-        /** portfolio */
-            // Route::any('portfolio', 'PortfolioController@index')->name('portfolio');
-            // Route::get('portfolio/create', 'PortfolioController@create')->name('portfolio.create');
-            // Route::post('portfolio/insert', 'PortfolioController@insert')->name('portfolio.insert');
-            // Route::get('portfolio/view/{id?}', 'PortfolioController@view')->name('portfolio.view');
-            // Route::get('portfolio/edit/{id?}', 'PortfolioController@edit')->name('portfolio.edit');
-            // Route::patch('portfolio/update', 'PortfolioController@update')->name('portfolio.update');
-            // Route::post('portfolio/change-status', 'PortfolioController@change_status')->name('portfolio.change.status');
-        /** portfolio */
+        /** slider */
+            Route::any('slider', 'SliderController@index')->name('slider');
+            Route::get('slider/create', 'SliderController@create')->name('slider.create');
+            Route::post('slider/insert', 'SliderController@insert')->name('slider.insert');
+            Route::get('slider/view/{id?}', 'SliderController@view')->name('slider.view');
+            Route::get('slider/edit/{id?}', 'SliderController@edit')->name('slider.edit');
+            Route::patch('slider/update', 'SliderController@update')->name('slider.update');
+            Route::post('slider/change-status', 'SliderController@change_status')->name('slider.change.status');
+        /** slider */
 
         /** contact */
             Route::any('contact', 'ContactController@index')->name('contact');

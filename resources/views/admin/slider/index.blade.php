@@ -4,7 +4,7 @@
 @endsection
 
 @section('title')
-    {{ $section ?? '' }}
+    Sliders
 @endsection
 
 @section('styles')
@@ -14,20 +14,20 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{ $section ?? '' }}</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Sliders</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.portfolio') }}" class="text-muted">{{ $section ?? '' }}</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">{{ $title ?? 'Index' }}</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.slider') }}" class="text-muted">Sliders</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">List</li>
                     </ol>
                 </nav>
             </div>
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
-                <a href="{{ route('admin.portfolio.create') }}" class="btn waves-effect waves-light btn-rounded btn-outline-primary mb-3 ml-3">Add</a>
+                <a href="{{ route('admin.slider.create') }}" class="btn waves-effect waves-light btn-rounded btn-outline-primary mb-3 ml-3">Add</a>
             </div>
         </div>
     </div>
@@ -40,8 +40,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Category</th>
                             <th>Title</th>
+                            <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -81,7 +81,7 @@
                     // lengthChange: false,
 
                     "ajax":{
-                        "url": "{{ route('admin.portfolio') }}",
+                        "url": "{{ route('admin.slider') }}",
                         "type": "POST",
                         "dataType": "json",
                         "data":{
@@ -99,12 +99,12 @@
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'category_id',
-                            name: 'category_id'
-                        },
-                        {
                             data: 'title',
                             name: 'title'
+                        },
+                        {
+                            data: 'image',
+                            name: 'image'
                         },
                         {
                             data: 'action',
@@ -123,7 +123,7 @@
 
             if (confirm(msg)) {
                 $.ajax({
-                    "url": "{!! route('admin.portfolio.change.status') !!}",
+                    "url": "{!! route('admin.slider.change.status') !!}",
                     "dataType": "json",
                     "type": "POST",
                     "data":{
