@@ -94,6 +94,16 @@ Route::group(['middleware' => ['prevent-back-history'], 'prefix' => 'admin', 'na
             Route::post('about/change-status', 'AboutController@change_status')->name('about.change.status');
         /** about */
 
+        /** workspace */
+            Route::any('workspace', 'WorkspaceController@index')->name('workspace');
+            Route::get('workspace/create', 'WorkspaceController@create')->name('workspace.create');
+            Route::post('workspace/insert', 'WorkspaceController@insert')->name('workspace.insert');
+            Route::get('workspace/view/{id?}', 'WorkspaceController@view')->name('workspace.view');
+            Route::get('workspace/edit/{id?}', 'WorkspaceController@edit')->name('workspace.edit');
+            Route::patch('workspace/update', 'WorkspaceController@update')->name('workspace.update');
+            Route::post('workspace/change-status', 'WorkspaceController@change_status')->name('workspace.change.status');
+        /** workspace */
+
         /** blog */
             Route::any('blog', 'BlogController@index')->name('blog');
             Route::get('blog/create', 'BlogController@create')->name('blog.create');

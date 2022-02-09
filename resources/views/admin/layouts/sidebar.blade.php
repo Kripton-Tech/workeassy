@@ -8,6 +8,12 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Request::is('workspace*') ? 'selected' : '' }}">
+                    <a class="sidebar-link {{ Request::is('workspace*') ? 'active' : '' }}" href="{{ route('admin.workspace') }}" aria-expanded="false">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="hide-menu">Workspaces</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('slider*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('slider*') ? 'active' : '' }}" href="{{ route('admin.slider') }}" aria-expanded="false">
                         <i class="fas fa-file-image"></i>
@@ -28,7 +34,7 @@
                 </li>
                 <li class="sidebar-item {{ Request::is('blog*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('blog*') ? 'active' : '' }}" href="{{ route('admin.blog') }}" aria-expanded="false">
-                        <i class="fas fa-bell-o"></i>
+                        <i class="fas fa-comment"></i>
                         <span class="hide-menu">Blogs</span>
                     </a>
                 </li>

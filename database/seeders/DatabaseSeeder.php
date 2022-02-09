@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder{
             VideoSeeder::class,
             AboutSeeder::class,
             BlogSeeder::class,
+            WorkspaceSeeder::class,
         ]);
     }
 }
