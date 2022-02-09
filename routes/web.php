@@ -103,6 +103,16 @@ Route::group(['middleware' => ['prevent-back-history'], 'prefix' => 'admin', 'na
             Route::patch('workspace/update', 'WorkspaceController@update')->name('workspace.update');
             Route::post('workspace/change-status', 'WorkspaceController@change_status')->name('workspace.change.status');
         /** workspace */
+        
+        /** gallery */
+            Route::any('gallery', 'GalleryController@index')->name('gallery');
+            Route::get('gallery/create', 'GalleryController@create')->name('gallery.create');
+            Route::post('gallery/insert', 'GalleryController@insert')->name('gallery.insert');
+            Route::get('gallery/view/{id?}', 'GalleryController@view')->name('gallery.view');
+            Route::get('gallery/edit/{id?}', 'GalleryController@edit')->name('gallery.edit');
+            Route::patch('gallery/update', 'GalleryController@update')->name('gallery.update');
+            Route::post('gallery/change-status', 'GalleryController@change_status')->name('gallery.change.status');
+        /** gallery */
 
         /** blog */
             Route::any('blog', 'BlogController@index')->name('blog');

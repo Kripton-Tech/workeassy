@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder{
             AboutSeeder::class,
             BlogSeeder::class,
             WorkspaceSeeder::class,
+            GallerySeeder::class,
         ]);
     }
 }

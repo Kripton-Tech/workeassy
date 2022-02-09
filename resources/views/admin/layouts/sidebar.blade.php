@@ -20,6 +20,12 @@
                         <span class="hide-menu">Sliders</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Request::is('gallery*') ? 'selected' : '' }}">
+                    <a class="sidebar-link {{ Request::is('gallery*') ? 'active' : '' }}" href="{{ route('admin.gallery') }}" aria-expanded="false">
+                        <i class="fas fa-camera"></i>
+                        <span class="hide-menu">Galleries</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('toward*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('toward*') ? 'active' : '' }}" href="{{ route('admin.toward') }}" aria-expanded="false">
                         <i class="fas fa-handshake"></i>
