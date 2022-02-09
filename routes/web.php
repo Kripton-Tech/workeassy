@@ -83,6 +83,16 @@ Route::group(['middleware' => ['prevent-back-history'], 'prefix' => 'admin', 'na
             Route::patch('toward/update', 'TowardController@update')->name('toward.update');
             Route::post('toward/change-status', 'TowardController@change_status')->name('toward.change.status');
         /** toward */
+        
+        /** video */
+            Route::any('video', 'VideoController@index')->name('video');
+            Route::get('video/create', 'VideoController@create')->name('video.create');
+            Route::post('video/insert', 'VideoController@insert')->name('video.insert');
+            Route::get('video/view/{id?}', 'VideoController@view')->name('video.view');
+            Route::get('video/edit/{id?}', 'VideoController@edit')->name('video.edit');
+            Route::patch('video/update', 'VideoController@update')->name('video.update');
+            Route::post('video/change-status', 'VideoController@change_status')->name('video.change.status');
+        /** video */
 
         /** contact */
             Route::any('contact', 'ContactController@index')->name('contact');

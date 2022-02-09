@@ -18,9 +18,10 @@ class TowardController extends Controller{
                                         DB::Raw("CASE
                                             WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
                                             ELSE 'default.png'
-                                        END as image")
+                                        END as image"), 
+                                        'status'
                                     )
-                                ->orderBy('id','desc')
+                                ->orderBy('id')
                                 ->get();
 
                 return Datatables::of($data)

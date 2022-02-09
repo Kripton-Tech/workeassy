@@ -10,14 +10,20 @@
                 </li>
                 <li class="sidebar-item {{ Request::is('slider*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('slider*') ? 'active' : '' }}" href="{{ route('admin.slider') }}" aria-expanded="false">
-                        <i class="fas fa-file"></i>
+                        <i class="fas fa-file-image"></i>
                         <span class="hide-menu">Sliders</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('toward*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('toward*') ? 'active' : '' }}" href="{{ route('admin.toward') }}" aria-expanded="false">
-                        <i class="fas fa-file"></i>
+                        <i class="fas fa-handshake"></i>
                         <span class="hide-menu">Approch Towards</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('video*') ? 'selected' : '' }}">
+                    <a class="sidebar-link {{ Request::is('video*') ? 'active' : '' }}" href="{{ route('admin.video') }}" aria-expanded="false">
+                        <i class="fas fa-play"></i>
+                        <span class="hide-menu">Coworking Videos</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('contact*') ? 'selected' : '' }}">
