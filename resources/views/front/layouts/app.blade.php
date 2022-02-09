@@ -20,7 +20,6 @@
                 <i class="bi bi-phone d-flex align-items-center ms-4"><span>{{ _settings('CONTACT_NUMBER') }}</span></i>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
-                <a href="//{{ _settings('TWITTER') }}" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="//{{ _settings('FACEBOOK') }}" class="facebook"><i class="bi bi-facebook"></i></a>
                 <a href="//{{ _settings('INSTAGRAM') }}" class="instagram"><i class="bi bi-instagram"></i></a>
                 <a href="//{{ _settings('LINKEDIN') }}" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
