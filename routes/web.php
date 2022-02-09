@@ -74,6 +74,16 @@ Route::group(['middleware' => ['prevent-back-history'], 'prefix' => 'admin', 'na
             Route::post('slider/change-status', 'SliderController@change_status')->name('slider.change.status');
         /** slider */
 
+        /** toward */
+            Route::any('toward', 'TowardController@index')->name('toward');
+            Route::get('toward/create', 'TowardController@create')->name('toward.create');
+            Route::post('toward/insert', 'TowardController@insert')->name('toward.insert');
+            Route::get('toward/view/{id?}', 'TowardController@view')->name('toward.view');
+            Route::get('toward/edit/{id?}', 'TowardController@edit')->name('toward.edit');
+            Route::patch('toward/update', 'TowardController@update')->name('toward.update');
+            Route::post('toward/change-status', 'TowardController@change_status')->name('toward.change.status');
+        /** toward */
+
         /** contact */
             Route::any('contact', 'ContactController@index')->name('contact');
             Route::get('contact/view/{id?}', 'ContactController@view')->name('contact.view');

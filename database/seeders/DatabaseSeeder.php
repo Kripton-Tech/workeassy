@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder{
             UserSeeder::class,
             SettingSeeder::class,
             SliderSeeder::class,
+            TowardSeeder::class,
         ]);
     }
 }

@@ -14,6 +14,12 @@
                         <span class="hide-menu">Sliders</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Request::is('toward*') ? 'selected' : '' }}">
+                    <a class="sidebar-link {{ Request::is('toward*') ? 'active' : '' }}" href="{{ route('admin.toward') }}" aria-expanded="false">
+                        <i class="fas fa-file"></i>
+                        <span class="hide-menu">Approch Towards</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('contact*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('contact*') ? 'active' : '' }}" href="{{ route('admin.contact') }}" aria-expanded="false">
                         <i class="fas fa-id-card"></i>
