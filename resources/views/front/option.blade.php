@@ -28,7 +28,7 @@
             -moz-transform: translateY(-10px);
         }
 
-        .box .icon i {
+         .box .icon i {
             color: #444;
             font-size: 64px;
             transition: 0.5s;
@@ -40,7 +40,7 @@
             font-weight: 700;
             font-size: 20px;
             margin: 0 !important;
-            margin-left: 10px !important;
+            /* margin-left: 10px !important; */
         }
     </style>
 @endsection
@@ -74,45 +74,45 @@
                 <div class="col-lg-12 mt-2">
                     <div class="row">
                         <div class="col-lg-3 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="box d-flex align-items-center justify-content-between">
-                                <div class="icon"><i class='bx bxs-phone-call'></i></div>
-                                <h4 class="title">Reception</h4>
+                            <div class="box d-flex flex-column align-items-center">
+                                <div class="icon text-center"><i class='bx bxs-phone-call'></i></div>
+                                <h4 class="title text-center">Reception</h4>
                             </div>
                         </div>
                         <div class="col-lg-3 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="box d-flex align-items-center justify-content-between">
-                                <div class="icon"><i class='bx bx-wifi'></i></div>
-                                <h4 class="title">Internet & wifi</h4>
+                            <div class="box d-flex flex-column align-items-center">
+                                <div class="icon text-center"><i class='bx bx-wifi'></i></div>
+                                <h4 class="title text-center">Internet & wifi</h4>
                             </div>
                         </div>
                         <div class="col-lg-3 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="box d-flex align-items-center justify-content-between">
-                                <div class="icon"><i class='bx bxs-video'></i></div>
-                                <h4 class="title">Boardrooms</h4>
+                            <div class="box d-flex flex-column align-items-center">
+                                <div class="icon text-center"><i class='bx bxs-video'></i></div>
+                                <h4 class="title text-center">Boardrooms</h4>
                             </div>
                         </div>
                         <div class="col-lg-3 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="box d-flex align-items-center justify-content-between">
-                                <div class="icon"><i class='bx bxs-printer'></i></div>
-                                <h4 class="title">Photocopy & printing</h4>
+                            <div class="box d-flex flex-column align-items-center">
+                                <div class="icon text-center"><i class='bx bxs-printer'></i></div>
+                                <h4 class="title text-center">Photocopy & printing</h4>
                             </div>
                         </div>
                         <div class="col-lg-3 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="box d-flex align-items-center justify-content-between">
-                                <div class="icon"><i class="bx bxs-briefcase-alt-2"></i></div>
-                                <h4 class="title">Meeting Room</h4>
+                            <div class="box d-flex flex-column align-items-center">
+                                <div class="icon text-center"><i class="bx bxs-briefcase-alt-2"></i></div>
+                                <h4 class="title text-center">Meeting Room</h4>
                             </div>
                         </div>
                         <div class="col-lg-3 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="box d-flex align-items-center justify-content-between">
-                                <div class="icon"><i class='bx bxs-drink'></i></div>
-                                <h4 class="title">Tea & coffee</h4>
+                            <div class="box d-flex flex-column align-items-center">
+                                <div class="icon text-center"><i class='bx bxs-drink'></i></div>
+                                <h4 class="title text-center">Tea & coffee</h4>
                             </div>
                         </div>
                         <div class="col-lg-3 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="box d-flex align-items-center justify-content-between">
-                                <div class="icon"><i class='bx bxs-calendar'></i></div>
-                                <h4 class="title">Networking events</h4>
+                            <div class="box d-flex flex-column align-items-center">
+                                <div class="icon text-center"><i class='bx bxs-calendar'></i></div>
+                                <h4 class="title text-center">Networking events</h4>
                             </div>
                         </div>
                     </div>

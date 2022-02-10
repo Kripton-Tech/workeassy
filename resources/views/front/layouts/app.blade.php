@@ -29,7 +29,6 @@
     <header id="header" class="d-flex align-items-center">
         <div class="container d-flex justify-content-between">
             <div id="logo">
-                <!-- <h1><a href="">Reve<span>al</span></a></h1> -->
                 <a href="{{ route('home') }}"><img src="{{ _logo() }}" alt=""></a>
             </div>
             <nav id="navbar" class="navbar">
@@ -42,20 +41,32 @@
                     <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                             <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
                             <li><a href="#">Drop Down 2</a></li>
                             <li><a href="#">Drop Down 3</a></li>
                             <li><a href="#">Drop Down 4</a></li>
                         </ul>
                     </li> -->
+                    @php
+                        $option_path = URL('uploads/workspace').'/';
+                        $options = DB::table('workspaces')
+                                        ->select('id', 'title', DB::Raw("CONCAT(SUBSTRING(".'description'.", 1, 100), '...') as description"),
+                                                DB::Raw("CASE
+                                                    WHEN ".'image'." != '' THEN CONCAT("."'".$option_path."'".", ".'image'.")
+                                                    ELSE CONCAT("."'".$option_path."'".", 'default.png')
+                                                END as image")
+                                            )
+                                        ->where(['status' => 'active'])
+                                        ->get();
+                    @endphp
+                    <li class="dropdown"><a href="#"><span>Workspace +</span></a>
+                        <ul>
+                            @if($options->isNotEmpty())
+                                @foreach($options as $row)
+                                    <li><a href="{{ route('option', ['id' => base64_encode($row->id)]) }}">{{ $row->title ?? '' }}</a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </li>
                     <li><a class="nav-link scrollto {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

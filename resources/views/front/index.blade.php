@@ -22,47 +22,14 @@
             width: 0 !important;
         }
         
-        /* @media only screen and (max-width: 571px) { 
-            #workspace_options .section-header h2::before {
-                left: 15% !important;
-                width: 150px !important;
-            }
-        }
-
-        @media only screen and (min-width: 572px) and (max-width: 768px) { 
-            #workspace_options .section-header h2::before {
-                left: 14% !important;
-                width: 150px !important;
-            }
-        }
-
-        @media only screen and (min-width: 769px) and (max-width: 992px) { 
-            #workspace_options .section-header h2::before {
-                left: 23% !important;
-                width: 150px !important;
-            }
-        }
-
-        @media only screen and (min-width: 993px) and (max-width: 1024px) { 
-            #workspace_options .section-header h2::before {
-                left: 30% !important;
-                width: 150px !important;
-            }
+        #workspace_options .card{
+            border-radius: 8% !important;
         }
         
-        @media only screen and (min-width: 1024px) and (max-width: 1199px) { 
-            #workspace_options .section-header h2::before {
-                left: 30% !important;
-                width: 150px !important;
-            }
+        #workspace_options .card img{
+            border-top-right-radius: 8% !important;
+            border-top-left-radius: 8% !important;
         }
-
-        @media only screen and (min-width: 1200px){ 
-            #workspace_options .section-header h2::before {
-                left: 33% !important;
-                width: 150px !important;
-            }
-        } */
     </style>
 @endsection
 
@@ -118,7 +85,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $row->title ?? '' }}</h5>
                                     <p class="card-text">{{ $row->description ?? '' }}</p>
-                                    <a href="{{ route('option', ['id' => base64_encode($row->id)]) }}" class="btn btn-primary">Read More...</a>
+                                    <a href="{{ route('option', ['id' => base64_encode($row->id)]) }}" class="card-link">Read More...</a>
                                 </div>
                             </div>
                         </div>
