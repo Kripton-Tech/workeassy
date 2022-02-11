@@ -44,12 +44,6 @@
                         <span class="hide-menu">Blogs</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('video*') ? 'selected' : '' }}">
-                    <a class="sidebar-link {{ Request::is('video*') ? 'active' : '' }}" href="{{ route('admin.video') }}" aria-expanded="false">
-                        <i class="fas fa-play"></i>
-                        <span class="hide-menu">Coworking Videos</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('contact*') ? 'selected' : '' }}">
                     <a class="sidebar-link {{ Request::is('contact*') ? 'active' : '' }}" href="{{ route('admin.contact') }}" aria-expanded="false">
                         <i class="fas fa-id-card"></i>

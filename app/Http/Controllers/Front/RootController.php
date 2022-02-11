@@ -34,9 +34,7 @@ class RootController extends Controller{
                                 ->where(['status' => 'active'])
                                 ->get();
 
-        $links = Video::select('link')->where(['status' => 'active'])->get();
-
-        return view('front.index')->with(['sliders' => $sliders, 'options' => $options, 'links' => $links]);
+        return view('front.index')->with(['sliders' => $sliders, 'options' => $options]);
     }
 
     public function option(Request $request, $id=""){

@@ -94,22 +94,6 @@
             </div>
         </div>
     </section>
-    <section id="coworking_space">
-        <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2 class="text-center">Everything you want to know about WorkEasy Coworking Space</h2>
-            </div>
-            <div class="row gy-4">
-                @if($links->isNotEmpty())
-                    @foreach($links as $row)
-                        <div class="col-lg-4" data-aos="fade-up" style="height: 250px;" data-aos-delay="100">
-                            <iframe style="width:-webkit-fill-available; height: -webkit-fill-available;" src="{{ $row->link }}"></iframe>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </section>
     <section id="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
