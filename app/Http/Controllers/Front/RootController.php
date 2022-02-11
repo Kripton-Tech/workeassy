@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Slider;
 use App\Models\Workspace;
-use App\Models\Video;
+use App\Models\Toward;
+use App\Models\About;
+use App\Models\Blog;
 use App\Http\Requests\ContactRequest;
 use DB, Mail;
 use Carbon\Carbon;
@@ -33,8 +35,28 @@ class RootController extends Controller{
                                     )
                                 ->where(['status' => 'active'])
                                 ->get();
+                                
+        $toward_path = URL('uploads/toward').'/';
+        $towards = Toward::select('id', 'title',
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$toward_path."'".", ".'image'.")
+                                            ELSE CONCAT("."'".$toward_path."'".", 'default.png')
+                                        END as image")
+                                    )
+                                ->where(['status' => 'active'])
+                                ->get();
+                                
+        $abouts_path = URL('uploads/about').'/';
+        $abouts = About::select('id', 'title', DB::Raw("CONCAT(SUBSTRING(".'description'.", 1, 150), '...') as description"),
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$abouts_path."'".", ".'image'.")
+                                            ELSE CONCAT("."'".$abouts_path."'".", 'default.png')
+                                        END as image")
+                                    )
+                                ->where(['status' => 'active'])
+                                ->get();
 
-        return view('front.index')->with(['sliders' => $sliders, 'options' => $options]);
+        return view('front.index')->with(['sliders' => $sliders, 'options' => $options, 'towards' => $towards, 'abouts' => $abouts]);
     }
 
     public function option(Request $request, $id=""){
@@ -61,7 +83,23 @@ class RootController extends Controller{
     }
 
     public function about(Request $request){
-        return view('front.about');
+        $path = URL('uploads/about').'/';
+        $data = About::select('id', 'title', 'description',
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
+                                            ELSE CONCAT("."'".$path."'".", 'default.png')
+                                        END as image")
+                                    )
+                                ->where(['status' => 'active'])
+                                ->get();
+
+        return view('front.about')->with(['data' => $data]);
+    }
+
+    public function blog(Request $request){
+        $data = Blog::select('id', 'title', 'description')->where(['status' => 'active'])->get();
+
+        return view('front.blog')->with(['data' => $data]);
     }
 
     public function contact(Request $request){

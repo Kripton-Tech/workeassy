@@ -30,6 +30,35 @@
             border-top-right-radius: 8% !important;
             border-top-left-radius: 8% !important;
         }
+
+        #approch .box{
+            padding: 40px;
+            box-shadow: 10px 10px 15px rgb(73 78 92 / 10%);
+            background: #fff;
+            transition: 0.4s;
+            height: 100%;
+        }
+
+        #approch .box:hover {
+            box-shadow: 0px 0px 30px rgb(73 78 92 / 15%);
+            transform: translateY(-10px);
+            -webkit-transform: translateY(-10px);
+            -moz-transform: translateY(-10px);
+        }
+
+        #approch .box .icon i {
+            color: #444;
+            font-size: 64px;
+            transition: 0.5s;
+            line-height: 0;
+            margin-top: 34px;
+        }
+
+        #approch .box h4 {
+            font-weight: 700;
+            font-size: 20px;
+            margin: 0 !important;
+        }
     </style>
 @endsection
 
@@ -83,7 +112,7 @@
                             <div class="card">
                                 <img src="{{ $row->image }}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $row->title ?? '' }}</h5>
+                                    <h5 class="card-title fw-bold">{{ $row->title ?? '' }}</h5>
                                     <p class="card-text">{{ $row->description ?? '' }}</p>
                                     <a href="{{ route('option', ['id' => base64_encode($row->id)]) }}" class="card-link">Read More...</a>
                                 </div>
@@ -92,6 +121,47 @@
                     @endforeach
                 @endif
             </div>
+        </div>
+    </section>
+    <section id="approch" class="container">
+        <div class="row my-5">
+            <div class="col-lg-12">
+                <h1 class="text-center">APPROACH TOWARDS THE PANDEMIC</h1>
+            </div>
+            <div class="col-lg-12 mt-2">
+                <div class="row">
+                    @if($towards->isNotEmpty())
+                        @foreach($towards as $row)
+                            <div class="col-lg-4 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                                <div class="box d-flex flex-column align-items-center">
+                                    <div class="icon text-center mb-3">
+                                        <img src="{{ $row->image }}" height="100" width="100" alt="">
+                                    </div>
+                                    <h4 class="title text-center">{{ $row->title }}</h4>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="container">
+        <div class="row gy-4">
+            @if($abouts->isNotEmpty())
+                @foreach($abouts as $row)
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card">
+                            <img src="{{ $row->image }}" style="max-height: 250px; min-height: 250px;" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ $row->title ?? '' }}</h5>
+                                <p class="card-text">{{ $row->description ?? '' }}</p>
+                                <a href="{{ route('about') }}" class="card-link">Read More...</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </section>
     <section id="contact">

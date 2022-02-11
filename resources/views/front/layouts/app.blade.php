@@ -67,6 +67,7 @@
                             @endif
                         </ul>
                     </li>
+                    <li><a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ route('blog') }}">Blog</a></li>
                     <li><a class="nav-link scrollto {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

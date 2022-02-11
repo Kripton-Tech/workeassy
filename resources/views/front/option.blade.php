@@ -40,7 +40,6 @@
             font-weight: 700;
             font-size: 20px;
             margin: 0 !important;
-            /* margin-left: 10px !important; */
         }
     </style>
 @endsection
@@ -53,14 +52,14 @@
                 <div class="col-lg-6 about-img">
                     <img src="{{ $data->image }}" alt="">
                 </div>
-                <div class="col-lg-6 content p-5">
+                <div class="col-lg-6 content px-5">
                     <h2>{{ $data->title ?? '' }}</h2>
                     <p>{{ $data->sub_title ?? '' }}</p>
                     <a href="{{ route('contact') }}" class="btn btn-primary mt-5">Book Now</a>
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-lg-6 content p-5">
+                <div class="col-lg-6 content px-5">
                     <p>{{ $data->description ?? '' }}</p>
                 </div>
                 <div class="col-lg-6 about-img">
