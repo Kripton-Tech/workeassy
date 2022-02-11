@@ -47,6 +47,7 @@ Route::group(['namespace' => 'Front'], function(){
     Route::get('option/{id?}', 'RootController@option')->name('option'); 
     Route::get('contact', 'RootController@contact')->name('contact'); 
     Route::get('blog', 'RootController@blog')->name('blog'); 
+    Route::get('gallery', 'RootController@gallery')->name('gallery'); 
     Route::post('/contactus', 'RootController@contactus')->name('contactus'); 
 });
 

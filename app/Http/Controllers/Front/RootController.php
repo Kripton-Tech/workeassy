@@ -10,6 +10,7 @@ use App\Models\Workspace;
 use App\Models\Toward;
 use App\Models\About;
 use App\Models\Blog;
+use App\Models\Gallery;
 use App\Http\Requests\ContactRequest;
 use DB, Mail;
 use Carbon\Carbon;
@@ -94,6 +95,20 @@ class RootController extends Controller{
                                 ->get();
 
         return view('front.about')->with(['data' => $data]);
+    }
+
+    public function gallery(Request $request){
+        $path = URL('uploads/gallery').'/';
+        $data = Gallery::select('id',
+                                    DB::Raw("CASE
+                                        WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
+                                        ELSE CONCAT("."'".$path."'".", 'default.png')
+                                    END as image")
+                                )
+                                ->where(['status' => 'active'])
+                                ->get();
+
+        return view('front.gallery')->with(['data' => $data]);
     }
 
     public function blog(Request $request){
