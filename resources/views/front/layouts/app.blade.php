@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <section id="topbar" class="d-flex align-items-center">
+    <!-- <section id="topbar" class="d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
                 <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:{{ _settings('CONTACT_EMAIL') }}">{{ _settings('CONTACT_EMAIL') }}</a></i>
@@ -25,11 +25,11 @@
                 <a href="//{{ _settings('LINKEDIN') }}" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
             </div>
         </div>
-    </section>
+    </section> -->
     <header id="header" class="d-flex align-items-center">
         <div class="container d-flex justify-content-between">
             <div id="logo">
-                <a href="{{ route('home') }}"><img src="{{ _logo() }}" alt=""></a>
+                <a href="{{ route('home') }}"><img src="{{ _logo() }}" style="max-width: 224px;" alt="Logo"></a>
             </div>
             <nav id="navbar" class="navbar">
                 <ul>
