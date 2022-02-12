@@ -117,6 +117,10 @@ class RootController extends Controller{
         return view('front.blog')->with(['data' => $data]);
     }
 
+    public function learneasy(Request $request){
+        return view('front.learneasy');
+    }
+
     public function contact(Request $request){
         return view('front.contact');
     }

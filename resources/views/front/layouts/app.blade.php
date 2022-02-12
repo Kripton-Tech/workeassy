@@ -52,7 +52,8 @@
                     </li>
                     <li><a class="nav-link {{ Request::is('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">Gallery</a></li>
                     <li><a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ route('blog') }}">Blog</a></li>
-                    <li><a class="nav-link scrollto {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
+                    <li><a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
+                    <li><a class="nav-link {{ Request::is('learneasy') ? 'active' : '' }}" href="{{ route('learneasy') }}">LearnEasy</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -101,7 +102,7 @@
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
                 <div class="contact-info d-flex align-items-center">
-                    <span>Copyright © {{ date('Y') }} Work Easy Ventures</span>
+                    <span>Copyright © {{ date('Y') }} {{ _settings('SITE_TITLE') }}</span>
                 </div>
                 <div class="social-links d-none d-md-flex align-items-center">
                     <a href="//{{ _settings('FACEBOOK') }}" class="facebook"><i class="bi bi-facebook"></i></a>
