@@ -52,13 +52,13 @@ Route::group(['namespace' => 'Front'], function(){
     Route::get('learneasy', 'RootController@learneasy')->name('learneasy');
 });
 
-Route::group(['middleware' => ['prevent-back-history'], 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
+Route::group(['middleware' => ['prevent-back-history', 'mail-service'], 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
     Route::group(['middleware' => ['guest']], function () {
         Route::get('/', 'AuthController@login')->name('login');
         Route::post('signin', 'AuthController@signin')->name('signin');
 
-        Route::get('forget-password', 'AuthController@forget_password')->name('forget.password');
-        Route::post('password-forget', 'AuthController@password_forget')->name('password.forget');
+        Route::get('forgot-password', 'AuthController@forgot_password')->name('forgot.password');
+        Route::post('password-forgot', 'AuthController@password_forgot')->name('password.forgot');
         Route::get('reset-password/{string}', 'AuthController@reset_password')->name('reset.password');
         Route::post('recover-password', 'AuthController@recover_password')->name('recover.password');
     });

@@ -32,6 +32,29 @@ class SettingSeeder extends Seeder{
             ]);
         }
 
+        $mails = [
+            'MAIL_MAILER' => 'smtp',
+            'MAIL_HOST' => 'mail.kriptontech.com',
+            'MAIL_PORT' => '26',
+            'MAIL_USERNAME' => 'info@kriptontech.com',
+            'MAIL_PASSWORD' => 'Info@kriptontech123',
+            'MAIL_ENCRYPTION' => 'tls',
+            'MAIL_FROM_ADDRESS' => 'info@kriptontech.com',
+            'MAIL_FROM_NAME' => 'Kriptontech Projects'
+        ];
+
+        foreach($mails as $key => $value){
+            Setting::create([
+                'key' => $key,
+                'value' => $value,
+                'type' => 'mail',
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => 1,
+                'updated_at' => date('Y-m-d H:i:s'),
+                'updated_by' => 1
+            ]);
+        }
+
         $social = [
             'FACEBOOK' => 'http://www.facbook.com/workeasy.coworking',
             'INSTAGRAM' => 'http://www.instagram.com/workeasy.coworking',

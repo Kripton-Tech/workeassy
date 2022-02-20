@@ -49,6 +49,9 @@ $tab = \Session::get('tab');
                         <a class="nav-link @if($tab == 'general') active @endif" href="#general" data-toggle="tab" aria-expanded="true">General</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link @if($tab == 'mail') active @endif" href="#mail" data-toggle="tab" aria-expanded="false">Mail</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link @if($tab == 'social') active @endif" href="#social" data-toggle="tab" aria-expanded="false">Social</a>
                     </li>
                     <li class="nav-item">
@@ -70,7 +73,33 @@ $tab = \Session::get('tab');
                                     </div>
                                     @endforeach
                                 @endif
-                                <input type="submit" value="Save" class="btn waves-effect waves-light btn-rounded btn-outline-primary mb-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 ml-4">
+                                    <input type="submit" value="Save" class="btn waves-effect waves-light btn-rounded btn-outline-primary">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane @if($tab == 'mail') active show @else fade @endif" id="mail" aria-expanded="true">
+                        <form action="{{ route('admin.settings.update') }}" method="post">
+                            <div class="row m-2">
+                                @method('post')
+                                @csrf
+                                <input type="hidden" name="tab" value="mail">
+                                @if(isset($mail) && $mail->isNotEmpty())
+                                    @foreach($mail as $row)
+                                    <div class="form-group col-sm-6">
+                                        <label><b>{{ strtoupper(str_replace('_', ' ', $row->key)) }}</b></label>
+                                        <input type="text" name="{{ $row->id }}" class="form-control" value="{{ $row->value }}" placeholder="{{ strtoupper(str_replace('_', ' ', $row->key)) }}" />
+                                    </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 ml-4">
+                                    <input type="submit" value="Save" class="btn waves-effect waves-light btn-rounded btn-outline-primary">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -88,7 +117,11 @@ $tab = \Session::get('tab');
                                     </div>
                                     @endforeach
                                 @endif
-                                <input type="submit" value="Save" class="btn waves-effect waves-light btn-rounded btn-outline-primary mb-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 ml-4">
+                                    <input type="submit" value="Save" class="btn waves-effect waves-light btn-rounded btn-outline-primary">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -107,7 +140,11 @@ $tab = \Session::get('tab');
                                     </div>
                                     @endforeach
                                 @endif
-                                <input type="submit" value="Save" class="btn waves-effect waves-light btn-rounded btn-outline-primary mb-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 ml-4">
+                                    <input type="submit" value="Save" class="btn waves-effect waves-light btn-rounded btn-outline-primary">
+                                </div>
                             </div>
                         </form>
                     </div>

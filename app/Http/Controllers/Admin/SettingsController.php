@@ -12,8 +12,9 @@ class SettingsController extends Controller{
         $general = Setting::select('id', 'key', 'value')->where(['type' => 'general'])->get();
         $social = Setting::select('id', 'key', 'value')->where(['type' => 'social'])->get();
         $logo = Setting::select('id', 'key', 'value')->where(['type' => 'logo'])->get();
+        $mail = Setting::select('id', 'key', 'value')->where(['type' => 'mail'])->get();
 
-        return view('admin.settings.index', ['general' => $general, 'social' => $social,'logo' => $logo]);
+        return view('admin.settings.index', ['general' => $general, 'mail' => $mail, 'social' => $social,'logo' => $logo]);
     }
 
     public function update(Request $request){

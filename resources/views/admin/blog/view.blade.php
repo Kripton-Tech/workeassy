@@ -46,7 +46,7 @@
                         <span class="kt-form__help error description"></span>
                     </div>
                 </div>
-                <div class="ml-4">
+                <div class="ml-4 mb-3">
                     <a href="{{ route('admin.blog') }}" class="btn waves-effect waves-light btn-rounded btn-outline-secondary">Cancel</a>
                 </div>
             </div>

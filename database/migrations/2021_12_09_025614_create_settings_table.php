@@ -11,7 +11,7 @@ class CreateSettingsTable extends Migration{
             $table->id();
             $table->string('key')->nullable();
             $table->text('value')->nullable();
-            $table->enum('type', ['general', 'social', 'logo'])->default('general');
+            $table->enum('type', ['general', 'mail', 'social', 'logo'])->default('general');
             $table->timestamps();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

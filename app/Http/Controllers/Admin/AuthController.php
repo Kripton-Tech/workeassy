@@ -53,23 +53,30 @@ class AuthController extends Controller{
             return redirect()->route('admin.login');
         }
     /** logout */
-
-    /** forget-password */
-        public function forget_password(Request $request){
-            return view('admin.auth.forget-password');
+    
+    /** forgot-password */
+        public function forgot_password(Request $request){
+            return view('admin.auth.forgot-password');
         }
-    /** forget-password */
+    /** forgot-password */
 
-    /** password-forget */
-        public function password_forget(Request $request){
+    /** password-forgot */
+        public function password_forgot(Request $request){
+            $validator = Validator::make(
+                        ['email' => $request->email],
+                        ['email' => 'required']
+                    );
+
+            if($validator->fails())
+                return redirect()->back()->withErrors($validator)->withInput();
+        
             $user = DB::table('users')->where(['email' => $request->email])->first();
 
-            if(!isset($user) && $user == null) {
+            if(!isset($user) && $user == null)
                 return redirect()->back()->withErrors(['email' => 'Entered email address does not exists in records, please check email address']);
-            }
 
             $token = Str::random(60);
-            $link = url('/admin/reset-password').'/'.$token.'?email='.urlencode($user->email);
+            $link = url('/reset-password').'/'.$token.'?email='.urlencode($user->email);
 
             DB::table('password_resets')->insert([
                 'email' => $request->email,
@@ -77,23 +84,23 @@ class AuthController extends Controller{
                 'created_at' => date('Y-m-d H:i:s')
             ]);
 
-            $mailData = array('from_email' => _mail_from(), 'email' => $request->email, 'link' => $link);
-            
+            $data = array('from_email' => _settings('MAIL_FROM_ADDRESS'), 'email' => $request->email, 'link' => $link);
+
             try{
-                Mail::to($request->email)->send(new ForgetPassword($mailData));
+                Mail::to($request->email)->send(new ForgotPassword($data));
 
                 return redirect()->route('admin.login')->with('success', 'please check your email and follow steps for reset password');
             }catch(\Exception $e){
                 DB::table('password_resets')->where(['email' => $request->email])->delete();
-                return redirect()->route('admin.login')->with('error', 'something went wrong, please try again later');
+                return redirect()->back()->with('error', 'something went wrong, please try again later');
             }
         }
-    /** password-forget */
+    /** password-forgot */
 
     /** reset-password */
         public function reset_password(Request $request, $string){
             $email = $request->email;
-            return view('admin.auth.reset_password', compact('email', 'string'));
+            return view('admin.auth.reset-password', compact('email', 'string'));
         }
     /** reset-password */
 
@@ -101,16 +108,16 @@ class AuthController extends Controller{
         public function recover_password(Request $request){
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|exists:users,email',
-                'password' => 'required',
+                'password' => 'required|string|min:6|max:12|confirmed',
                 'token' => 'required'
             ]);
 
             if($validator->fails())
                 return redirect()->back()->withErrors($validator)->withInput();
 
-            $tokenData = \DB::table('password_resets')->where('token', $request->token)->OrderBy('created_at', 'desc')->first();
+            $data = \DB::table('password_resets')->where('token', $request->token)->OrderBy('created_at', 'desc')->first();
 
-            if(!isset($tokenData) && $tokenData == null)
+            if(!isset($data) && $data == null)
                 return redirect()->route('admin.login')->with('error', 'Reset password token mismatch, Please regenerate link again')->withInput();
 
             $user = \DB::table('users')->where('email', $request->email)->first();
