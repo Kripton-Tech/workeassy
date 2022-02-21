@@ -148,6 +148,16 @@ Route::group(['middleware' => ['prevent-back-history', 'mail-service'], 'prefix'
             Route::post('faq/change-status', 'FaqController@change_status')->name('faq.change.status');
         /** faq */
 
+        /** testimonial */
+            Route::any('testimonial', 'TestimonialController@index')->name('testimonial');
+            Route::get('testimonial/create', 'TestimonialController@create')->name('testimonial.create');
+            Route::post('testimonial/insert', 'TestimonialController@insert')->name('testimonial.insert');
+            Route::get('testimonial/view/{id?}', 'TestimonialController@view')->name('testimonial.view');
+            Route::get('testimonial/edit/{id?}', 'TestimonialController@edit')->name('testimonial.edit');
+            Route::patch('testimonial/update', 'TestimonialController@update')->name('testimonial.update');
+            Route::post('testimonial/change-status', 'TestimonialController@change_status')->name('testimonial.change.status');
+        /** testimonial */
+
         /** contact */
             Route::any('contact', 'ContactController@index')->name('contact');
             Route::get('contact/view/{id?}', 'ContactController@view')->name('contact.view');

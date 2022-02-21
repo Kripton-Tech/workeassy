@@ -56,6 +56,12 @@
                         <span class="hide-menu">Faqs</span>
                     </a>
                 </li>
+                <li class="sidebar-item @route('admin.testimonial*') selected @endroute">
+                    <a class="sidebar-link @route('admin.testimonial*') active @endroute" href="{{ route('admin.testimonial') }}" aria-expanded="false">
+                        <i class="fas fa-address-card"></i>
+                        <span class="hide-menu">Testimonials</span>
+                    </a>
+                </li>
                 <li class="sidebar-item @route('admin.contact*') selected @endroute">
                     <a class="sidebar-link @route('admin.contact*') active @endroute" href="{{ route('admin.contact') }}" aria-expanded="false">
                         <i class="fas fa-id-card"></i>
