@@ -65,6 +65,95 @@
             margin: 0 !important;
         }
     </style>
+
+    <style>
+        #testimonial .card-main {
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px 0px #283593
+        }
+
+        #testimonial .card-0 {
+            color: #fff;
+            background-color: #0056b3;
+            position: relative;
+            margin-left: 70px;
+            border-radius: 10px;
+            min-height: 312px
+        }
+
+        #testimonial .carousel-indicators li {
+            cursor: pointer;
+            border-radius: 50% !important;
+            width: 10px;
+            height: 10px
+        }
+
+        #testimonial .profile {
+            color: #000;
+            background-color: #51d8af;
+            position: absolute;
+            left: -70px;
+            top: 17%;
+            border-radius: 8px;
+            border-top-left-radius: 0px;
+            border-bottom-right-radius: 0px
+        }
+
+        #testimonial .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-bottom-left-radius: 10px;
+            border-top-right-radius: 10px
+        }
+
+        #testimonial .open-quotes {
+            margin-left: 130px;
+            margin-top: 100px
+        }
+
+        #testimonial .content {
+            margin-left: 150px;
+            margin-right: 80px
+        }
+
+        #testimonial .close-quotes {
+            margin-bottom: 100px;
+            margin-right: 60px
+        }
+
+        @media screen and (max-width: 600px) {
+            #testimonial .card-main {
+                padding: 20px 10px
+            }
+
+            #testimonial .card-0 {
+                min-height: 432px
+            }
+
+            #testimonial .profile {
+                top: 24%
+            }
+
+            #testimonial .profile-pic {
+                width: 90px;
+                height: 90px
+            }
+
+            #testimonial .open-quotes {
+                margin-left: 100px
+            }
+
+            #testimonial .content {
+                margin-left: 120px;
+                margin-right: 50px
+            }
+
+            #testimonial .close-quotes {
+                margin-right: 30px
+            }
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -163,6 +252,54 @@
                     </div>
                 @endforeach
             @endif
+        </div>
+    </section>
+    <section id="testimonial">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+               <h2>Testimonial</h2>
+            </div>
+            <div class="container-fluid m-0 p-0">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10 col-lg-12 col-xl-12">
+                        <div class="card card-main border-0 text-center">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    @if($testimonials->isNotEmpty())
+                                        @php $i = 0; @endphp
+                                        @foreach($testimonials as $row)
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}"></li>
+                                            @php $i++; @endphp
+                                        @endforeach
+                                    @endif
+                                </ol>
+                                <div class="carousel-inner">
+                                    @if($testimonials->isNotEmpty())
+                                        @php $i = 0; @endphp
+                                        @foreach($testimonials as $row)
+                                            <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+                                                <div class="card border-0 card-0">
+                                                    <div class="card profile py-3 px-4">
+                                                        <div class="text-center"> 
+                                                            <img src="{{ $row->image }}" class="img-fluid profile-pic"> 
+                                                        </div>
+                                                        <h6 class="mb-0 mt-2">{{ $row->name }}</h6> 
+                                                        <small>{{ $row->title }}</small>
+                                                    </div> 
+                                                    <img class="img-fluid open-quotes" src="{{ asset('frontend/img/left-quote.png') }}" width="20" height="20">
+                                                    <p class="content mb-0">{{ $row->description }}</p> 
+                                                    <img class="img-fluid close-quotes ml-auto" src="{{ asset('frontend/img/right-quote.png') }}" width="20" height="20">
+                                                </div>
+                                            </div>
+                                        @php $i++; @endphp
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <section id="contact">

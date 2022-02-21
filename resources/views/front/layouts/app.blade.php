@@ -118,19 +118,6 @@
                 </div>
             </div>
         </section>
-        <!-- <section id="topbar" class="d-flex align-items-center">
-            <div class="container d-flex justify-content-center justify-content-md-between">
-                <div class="contact-info d-flex align-items-center">
-                    <span>Copyright © {{ date('Y') }} {{ _settings('SITE_TITLE') }}</span>
-                </div>
-                <div class="social-links d-none d-md-flex align-items-center">
-                    <a href="//{{ _settings('FACEBOOK') }}" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="//{{ _settings('INSTAGRAM') }}" class="instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="//{{ _settings('YOUTUBE') }}" class="youtube"><i class="bi bi-youtube"></i></i></a>
-                    <a href="//{{ _settings('LINKEDIN') }}" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-                </div>
-            </div>
-        </section> -->
     </footer>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

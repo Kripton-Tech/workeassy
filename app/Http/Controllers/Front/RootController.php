@@ -11,6 +11,7 @@ use App\Models\Toward;
 use App\Models\About;
 use App\Models\Faq;
 use App\Models\Gallery;
+use App\Models\Testimonial;
 use App\Http\Requests\ContactRequest;
 use DB, Mail;
 use Carbon\Carbon;
@@ -57,7 +58,17 @@ class RootController extends Controller{
                                 ->where(['status' => 'active'])
                                 ->get();
 
-        return view('front.index')->with(['sliders' => $sliders, 'options' => $options, 'towards' => $towards, 'abouts' => $abouts]);
+        $testimonial_path = URL('uploads/testimonial').'/';
+        $testimonials = Testimonial::select('id', 'name', 'title', 'description',
+                                        DB::Raw("CASE
+                                            WHEN ".'image'." != '' THEN CONCAT("."'".$testimonial_path."'".", ".'image'.")
+                                            ELSE CONCAT("."'".$testimonial_path."'".", 'default.png')
+                                        END as image")
+                                    )
+                                ->where(['status' => 'active'])
+                                ->get();
+
+        return view('front.index')->with(['sliders' => $sliders, 'options' => $options, 'towards' => $towards, 'abouts' => $abouts, 'testimonials' => $testimonials]);
     }
 
     public function option(Request $request, $id=""){
