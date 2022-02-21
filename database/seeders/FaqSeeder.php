@@ -1,12 +1,12 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\Blog;
+use App\Models\Faq;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-class BlogSeeder extends Seeder{
+class FaqSeeder extends Seeder{
     public function run(){
         $data = [
                     ['title' => 'Flexibility', 'description' => 'Working at WorkEasy coworking space means you are not getting tied up with unnecessary yearlong rental agreements which are not feasible for a lot of organisations and entrepreneurs. That means you can rent a dedicated desk or a private cabin for a minimum of 3 days or 1 week respectively. Bigger conference room can be rented on an hourly basis as well. This drastically decreases the pressure of traditional long term leases and these features are very essential for growing entrepreneurs and companies. Taste and see if it works for you (we are damn sure it would). It\'s flexibility like you have never seen before. It\'s flexibility on STEROIDS.'],
@@ -20,7 +20,7 @@ class BlogSeeder extends Seeder{
                 ];
 
         foreach($data as $row){
-            Blog::create([
+            Faq::create([
                 'title' => $row['title'],
                 'description' => $row['description'],
                 'status' => 'active',

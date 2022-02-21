@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder{
             SliderSeeder::class,
             TowardSeeder::class,
             AboutSeeder::class,
-            BlogSeeder::class,
+            FaqSeeder::class,
             WorkspaceSeeder::class,
             GallerySeeder::class,
         ]);

@@ -45,7 +45,7 @@ Route::group(['namespace' => 'Front'], function(){
     Route::get('/', 'RootController@index')->name('home'); 
     Route::get('about', 'RootController@about')->name('about'); 
     Route::get('option/{id?}', 'RootController@option')->name('option'); 
-    Route::get('blog', 'RootController@blog')->name('blog'); 
+    Route::get('faq', 'RootController@faq')->name('faq'); 
     Route::get('gallery', 'RootController@gallery')->name('gallery');
     Route::get('contact', 'RootController@contact')->name('contact'); 
     Route::post('contactus', 'RootController@contactus')->name('contactus'); 
@@ -118,15 +118,15 @@ Route::group(['middleware' => ['prevent-back-history', 'mail-service'], 'prefix'
             Route::post('gallery/change-status', 'GalleryController@change_status')->name('gallery.change.status');
         /** gallery */
 
-        /** blog */
-            Route::any('blog', 'BlogController@index')->name('blog');
-            Route::get('blog/create', 'BlogController@create')->name('blog.create');
-            Route::post('blog/insert', 'BlogController@insert')->name('blog.insert');
-            Route::get('blog/view/{id?}', 'BlogController@view')->name('blog.view');
-            Route::get('blog/edit/{id?}', 'BlogController@edit')->name('blog.edit');
-            Route::patch('blog/update', 'BlogController@update')->name('blog.update');
-            Route::post('blog/change-status', 'BlogController@change_status')->name('blog.change.status');
-        /** blog */
+        /** faq */
+            Route::any('faq', 'FaqController@index')->name('faq');
+            Route::get('faq/create', 'FaqController@create')->name('faq.create');
+            Route::post('faq/insert', 'FaqController@insert')->name('faq.insert');
+            Route::get('faq/view/{id?}', 'FaqController@view')->name('faq.view');
+            Route::get('faq/edit/{id?}', 'FaqController@edit')->name('faq.edit');
+            Route::patch('faq/update', 'FaqController@update')->name('faq.update');
+            Route::post('faq/change-status', 'FaqController@change_status')->name('faq.change.status');
+        /** faq */
 
         /** contact */
             Route::any('contact', 'ContactController@index')->name('contact');

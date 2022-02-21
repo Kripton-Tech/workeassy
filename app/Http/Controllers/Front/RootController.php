@@ -9,7 +9,7 @@ use App\Models\Slider;
 use App\Models\Workspace;
 use App\Models\Toward;
 use App\Models\About;
-use App\Models\Blog;
+use App\Models\Faq;
 use App\Models\Gallery;
 use App\Http\Requests\ContactRequest;
 use DB, Mail;
@@ -111,10 +111,10 @@ class RootController extends Controller{
         return view('front.gallery')->with(['data' => $data]);
     }
 
-    public function blog(Request $request){
-        $data = Blog::select('id', 'title', 'description')->where(['status' => 'active'])->get();
+    public function faq(Request $request){
+        $data = Faq::select('id', 'title', 'description')->where(['status' => 'active'])->get();
 
-        return view('front.blog')->with(['data' => $data]);
+        return view('front.faq')->with(['data' => $data]);
     }
 
     public function learneasy(Request $request){

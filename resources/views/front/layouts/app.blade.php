@@ -51,7 +51,7 @@
                         </ul>
                     </li>
                     <li><a class="nav-link {{ Request::is('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">Gallery</a></li>
-                    <li><a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ route('blog') }}">Blog</a></li>
+                    <li><a class="nav-link {{ Request::is('faq') ? 'active' : '' }}" href="{{ route('faq') }}">Faq's</a></li>
                     <li><a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
                     <li><a class="nav-link {{ Request::is('learneasy') ? 'active' : '' }}" href="{{ route('learneasy') }}">LearnEasy</a></li>
                 </ul>
@@ -61,18 +61,16 @@
     </header>
     
     @yield('content')
-
-    <!-- <footer id="footer">
-        <div class="container">
-            <div class="copyright">
-                Copyright © {{ date('Y') }} . All Rights Reserved by <a href="" target="_blank">{{ _settings('SITE_TITLE') }}</a>
-            </div>
-            <div class="credits">
-                Developed by <a href="#">{{ _settings('SITE_TITLE') }}</a>
+    <section id="topbar" class="d-flex align-items-center">
+        <div class="container d-flex justify-content-center justify-content-center">
+            <div class="social-links d-none d-md-flex align-items-center">
+                <a href="//{{ _settings('TWITTER') }}" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="//{{ _settings('FACEBOOK') }}" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="//{{ _settings('INSTAGRAM') }}" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="//{{ _settings('LINKEDIN') }}" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
-    </footer> -->
-
+    </section>
     <footer class="text-center text-lg-start text-dark" style="background-color: #ECEFF1">
         <section class="p-0 pt-2">
             <div class="container text-center text-md-start mt-2">
@@ -99,7 +97,7 @@
                 </div>
             </div>
         </section>
-        <section id="topbar" class="d-flex align-items-center">
+        <!-- <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
                 <div class="contact-info d-flex align-items-center">
                     <span>Copyright © {{ date('Y') }} {{ _settings('SITE_TITLE') }}</span>
@@ -111,7 +109,7 @@
                     <a href="//{{ _settings('LINKEDIN') }}" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
                 </div>
             </div>
-        </section>
+        </section> -->
     </footer>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -123,26 +123,22 @@
             </div>
         </div>
     </section>
-    <section id="approch" class="container">
-        <div class="row my-5">
-            <div class="col-lg-12">
-                <h1 class="text-center">APPROACH TOWARDS THE PANDEMIC</h1>
+    <section id="approch">
+        <div data-aos="fade-up">
+            <div class="section-header">
+               <h1 class="text-center">APPROACH TOWARDS THE PANDEMIC</h1>
             </div>
-            <div class="col-lg-12 mt-2">
-                <div class="row">
+            <div class="clients-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper align-items-center">
                     @if($towards->isNotEmpty())
                         @foreach($towards as $row)
-                            <div class="col-lg-4 p-2 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                                <div class="box d-flex flex-column align-items-center">
-                                    <div class="icon text-center mb-3">
-                                        <img src="{{ $row->image }}" height="100" width="100" alt="">
-                                    </div>
-                                    <h4 class="title text-center">{{ $row->title }}</h4>
-                                </div>
+                            <div class="swiper-slide">
+                                <img src="{{ $row->image }}" class="img-fluid" alt="{{ $row->title }}">
                             </div>
                         @endforeach
                     @endif
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -192,9 +188,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container mb-4">
-            <iframe src="{!! _settings('LOCATION') !!}" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
         <div class="container">
             <div class="form">

@@ -38,10 +38,10 @@
                         <span class="hide-menu">About Sections</span>
                     </a>
                 </li>
-                <li class="sidebar-item @route('admin.blog*') selected @endroute">
-                    <a class="sidebar-link @route('admin.blog*') active @endroute" href="{{ route('admin.blog') }}" aria-expanded="false">
+                <li class="sidebar-item @route('admin.faq*') selected @endroute">
+                    <a class="sidebar-link @route('admin.faq*') active @endroute" href="{{ route('admin.faq') }}" aria-expanded="false">
                         <i class="fas fa-comment"></i>
-                        <span class="hide-menu">Blogs</span>
+                        <span class="hide-menu">Faqs</span>
                     </a>
                 </li>
                 <li class="sidebar-item @route('admin.contact*') selected @endroute">

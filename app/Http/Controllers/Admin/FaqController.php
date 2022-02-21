@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\Blog;
-use App\Http\Requests\BlogRequest;
+use App\Models\Faq;
+use App\Http\Requests\FaqRequest;
 use Auth, DB, Mail, Validator, File, DataTables;
 
-class BlogController extends Controller{
+class FaqController extends Controller{
     /** index */
         public function index(Request $request){
             if($request->ajax()){
-                $data = Blog::select('id', 'title', 
+                $data = Faq::select('id', 'title', 
                                         DB::Raw("CONCAT(SUBSTRING(".'description'.", 1, 30), '...') as description"),
                                         'status'
                                     )
@@ -23,10 +23,10 @@ class BlogController extends Controller{
                         ->addIndexColumn()
                         ->addColumn('action', function($data){
                             return ' <div class="btn-group">
-                                            <a href="'.route('admin.blog.view', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
+                                            <a href="'.route('admin.faq.view', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
                                                 <i class="fa fa-eye"></i>
                                             </a> &nbsp;
-                                            <a href="'.route('admin.blog.edit', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
+                                            <a href="'.route('admin.faq.edit', ['id' => base64_encode($data->id)]).'" class="btn btn-default btn-xs">
                                                 <i class="fa fa-edit"></i>
                                             </a> &nbsp;
                                             <a href="javascript:;" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -53,18 +53,18 @@ class BlogController extends Controller{
                         ->make(true);
             }
 
-            return view('admin.blog.index');
+            return view('admin.faq.index');
         }
     /** index */
 
     /** create */
         public function create(Request $request){
-            return view('admin.blog.create');
+            return view('admin.faq.create');
         }
     /** create */
 
     /** insert */
-        public function insert(BlogRequest $request){
+        public function insert(FaqRequest $request){
             if($request->ajax()){ return true; }
 
             if(!empty($request->all())){
@@ -77,15 +77,15 @@ class BlogController extends Controller{
                     'updated_by' => auth()->user()->id
                 ];
 
-                $last_id = Blog::insertGetId($crud);
+                $last_id = Faq::insertGetId($crud);
 
                 if($last_id){
-                    return redirect()->route('admin.blog')->with('success', 'Record inserted successfully');
+                    return redirect()->route('admin.faq')->with('success', 'Record inserted successfully');
                 }else{
                     return redirect()->back()->with('error', 'Faild to insert record')->withInput();
                 }
             }else{
-                return redirect()->route('admin.blog')->with('error', 'Something went wrong');
+                return redirect()->route('admin.faq')->with('error', 'Something went wrong');
             }
         }
     /** insert */
@@ -93,42 +93,42 @@ class BlogController extends Controller{
     /** view */
         public function view(Request $request, $id=''){
             if($id == '')
-                return redirect()->route('admin.blog')->with('error', 'Something went wrong');
+                return redirect()->route('admin.faq')->with('error', 'Something went wrong');
 
             $id = base64_decode($id);
 
-            $data = Blog::select('id', 'title', 'description')->where(['id' => $id])->first();
+            $data = Faq::select('id', 'title', 'description')->where(['id' => $id])->first();
             
             if($data)
-                return view('admin.blog.view')->with(['data' => $data]);
+                return view('admin.faq.view')->with(['data' => $data]);
             else
-                return redirect()->route('admin.blog')->with('error', 'No data found');
+                return redirect()->route('admin.faq')->with('error', 'No data found');
         }
     /** view */
 
     /** edit */
         public function edit(Request $request, $id=''){
             if($id == '')
-                return redirect()->route('admin.blog')->with('error', 'Something went wrong');
+                return redirect()->route('admin.faq')->with('error', 'Something went wrong');
 
             $id = base64_decode($id);
 
-            $data = Blog::select('id', 'title', 'description')->where(['id' => $id])->first();
+            $data = Faq::select('id', 'title', 'description')->where(['id' => $id])->first();
             
             if($data)
-                return view('admin.blog.edit')->with(['data' => $data]);
+                return view('admin.faq.edit')->with(['data' => $data]);
             else
-                return redirect()->route('admin.blog')->with('error', 'No data found');
+                return redirect()->route('admin.faq')->with('error', 'No data found');
         }
     /** edit */ 
 
     /** update */
-        public function update(BlogRequest $request){
+        public function update(FaqRequest $request){
             if($request->ajax()){ return true; }
 
             if(!empty($request->all())){
                 $id = $request->id;
-                $exst_record = Blog::where(['id' => $id])->first();
+                $exst_record = Faq::where(['id' => $id])->first();
 
                 $crud = [
                     'title' => ucfirst($request->title),
@@ -137,10 +137,10 @@ class BlogController extends Controller{
                     'updated_by' => auth()->user()->id
                 ];
 
-                $update = Blog::where(['id' => $id])->update($crud);
+                $update = Faq::where(['id' => $id])->update($crud);
 
                 if($update){
-                    return redirect()->route('admin.blog')->with('success', 'Record updated successfully');
+                    return redirect()->route('admin.faq')->with('success', 'Record updated successfully');
                 }else{
                     return redirect()->back()->with('error', 'Faild to updated record')->withInput();
                 }
@@ -158,13 +158,13 @@ class BlogController extends Controller{
                 $id = base64_decode($request->id);
                 $status = $request->status;
 
-                $data = Blog::where(['id' => $id])->first();
+                $data = Faq::where(['id' => $id])->first();
 
                 if(!empty($data)){
                     if($status == 'delete'){
-                        $update = Blog::where(['id' => $id])->delete();
+                        $update = Faq::where(['id' => $id])->delete();
                     }else{
-                        $update = Blog::where(['id' => $id])->update(['status' => $status, 'updated_at' => date('Y-m-d H:i:s'), 'updated_by' => auth()->user()->id]);
+                        $update = Faq::where(['id' => $id])->update(['status' => $status, 'updated_at' => date('Y-m-d H:i:s'), 'updated_by' => auth()->user()->id]);
                     }
                     
                     if($update)
