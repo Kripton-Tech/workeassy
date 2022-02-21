@@ -9,4 +9,6 @@
 
 <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
 
+<link href="{{ asset('frontend/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+
 @yield('styles')

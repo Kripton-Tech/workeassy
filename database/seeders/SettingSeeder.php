@@ -57,6 +57,7 @@ class SettingSeeder extends Seeder{
         $social = [
             'FACEBOOK' => 'http://www.facbook.com/workeasy.coworking',
             'INSTAGRAM' => 'http://www.instagram.com/workeasy.coworking',
+            'YOUTUBE' => 'http://www.youtube.com/workeasy.coworking',
             'LINKEDIN' => 'https://www.linkedin.com/company/work-easy-coworking-space'
         ];
 
