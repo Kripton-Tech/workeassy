@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\File;
 class CategorySeeder extends Seeder{
     public function run(){
         $array = [
-            'PHP' => 'PHP',
-            'Android' => 'Android',
-            'Java' => 'Java',
-            'Javascript' => 'Javascript',
-            'Python' => 'Python'
+            'Dedicated' => 'Dedicated',
+            'Conferance' => 'Conferance',
+            'Private' => 'Private',
+            'Flexi' => 'Flexi'
         ];
 
         foreach($array as $key => $value){
