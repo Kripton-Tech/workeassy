@@ -61,10 +61,9 @@
     </header>
     
     @yield('content')
-    <section id="topbar" class="d-flex align-items-center">
+    <section id="topbar" class="d-flex align-items-center" style="background-color: #ECEFF1">
         <div class="container d-flex justify-content-center justify-content-center">
             <div class="social-links d-none d-md-flex align-items-center">
-                <a href="//{{ _settings('TWITTER') }}" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="//{{ _settings('FACEBOOK') }}" class="facebook"><i class="bi bi-facebook"></i></a>
                 <a href="//{{ _settings('INSTAGRAM') }}" class="instagram"><i class="bi bi-instagram"></i></a>
                 <a href="//{{ _settings('LINKEDIN') }}" class="linkedin"><i class="bi bi-linkedin"></i></a>

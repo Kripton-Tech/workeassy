@@ -16,8 +16,7 @@ class SettingSeeder extends Seeder{
             'CONTACT_EMAIL' => 'connect@workeasy.in',
             'MAIN_CONTACT_EMAIL' => 'connect@workeasy.in',
             'CONTACT_ADDRESS' => 'Sardar Nagar, Rajkot',
-            'MAIN_CONTACT_ADDRESS' => 'Sardar Nagar, Rajkot',
-            'LOCATION' => "https://maps.google.com/maps?q=workeasy&t=m&z=10&output=embed&iwloc=near",
+            'MAIN_CONTACT_ADDRESS' => 'Sardar Nagar, Rajkot'
         ];
 
         foreach($general as $key => $value){

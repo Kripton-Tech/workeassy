@@ -68,6 +68,26 @@ Route::group(['middleware' => ['prevent-back-history', 'mail-service'], 'prefix'
 
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+        /** category */
+            Route::any('category', 'CategoryController@index')->name('category');
+            Route::get('category/create', 'CategoryController@create')->name('category.create');
+            Route::post('category/insert', 'CategoryController@insert')->name('category.insert');
+            Route::get('category/view/{id?}', 'CategoryController@view')->name('category.view');
+            Route::get('category/edit/{id?}', 'CategoryController@edit')->name('category.edit');
+            Route::patch('category/update', 'CategoryController@update')->name('category.update');
+            Route::post('category/change-status', 'CategoryController@change_status')->name('category.change.status');
+        /** category */
+        
+        /** blogs */
+            Route::any('blog', 'BlogController@index')->name('blog');
+            Route::get('blog/create', 'BlogController@create')->name('blog.create');
+            Route::post('blog/insert', 'BlogController@insert')->name('blog.insert');
+            Route::get('blog/view/{id?}', 'BlogController@view')->name('blog.view');
+            Route::get('blog/edit/{id?}', 'BlogController@edit')->name('blog.edit');
+            Route::patch('blog/update', 'BlogController@update')->name('blog.update');
+            Route::post('blog/change-status', 'BlogController@change_status')->name('blog.change.status');
+        /** blogs */
+
         /** slider */
             Route::any('slider', 'SliderController@index')->name('slider');
             Route::get('slider/create', 'SliderController@create')->name('slider.create');

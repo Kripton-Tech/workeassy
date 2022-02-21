@@ -8,6 +8,18 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-item @route('admin.category*') selected @endroute">
+                    <a class="sidebar-link @route('admin.category*') active @endroute" href="{{ route('admin.category') }}" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                        <span class="hide-menu">Categories</span>
+                    </a>
+                </li>
+                <li class="sidebar-item @route('admin.blog*') selected @endroute">
+                    <a class="sidebar-link @route('admin.blog*') active @endroute" href="{{ route('admin.blog') }}" aria-expanded="false">
+                        <i class="fas fa-rss-square"></i>
+                        <span class="hide-menu">Blogs</span>
+                    </a>
+                </li>
                 <li class="sidebar-item @route('admin.workspace*') selected @endroute">
                     <a class="sidebar-link @route('admin.workspace*') active @endroute" href="{{ route('admin.workspace') }}" aria-expanded="false">
                         <i class="fas fa-briefcase"></i>

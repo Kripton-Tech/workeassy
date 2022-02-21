@@ -25,6 +25,11 @@
         #workspace_options .card{
             border-radius: 8% !important;
         }
+
+        #workspace_options .card-text{
+            min-height: 100px; !important;
+            max-height: 180px; !important;
+        }
         
         #workspace_options .card img{
             border-top-right-radius: 8% !important;
@@ -108,7 +113,7 @@
             <div class="row gy-4">
                 @if($options->isNotEmpty())
                     @foreach($options as $row)
-                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
                             <div class="card">
                                 <img src="{{ $row->image }}" class="card-img-top" alt="...">
                                 <div class="card-body">

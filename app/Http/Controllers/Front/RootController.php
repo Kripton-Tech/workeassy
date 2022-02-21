@@ -28,7 +28,7 @@ class RootController extends Controller{
                                 ->get();
 
         $option_path = URL('uploads/workspace').'/';
-        $options = Workspace::select('id', 'title', DB::Raw("CONCAT(SUBSTRING(".'description'.", 1, 100), '...') as description"),
+        $options = Workspace::select('id', 'title', DB::Raw("CONCAT(SUBSTRING(".'description'.", 1, 120), '...') as description"),
                                         DB::Raw("CASE
                                             WHEN ".'image'." != '' THEN CONCAT("."'".$option_path."'".", ".'image'.")
                                             ELSE CONCAT("."'".$option_path."'".", 'default.png')
