@@ -68,7 +68,7 @@
     
     @yield('content')
 
-    <footer class="text-center text-lg-start text-dark" style="background-color: #ECEFF1">
+    <footer class="text-center text-lg-start text-dark" style="background-color: #204d74; color:white !important;">
         <section class="p-0 pt-2">
             <div class="container text-center text-md-start mt-2">
                 <div class="row mt-3">
@@ -83,11 +83,11 @@
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto">
                         <h6 class="text-uppercase fw-bold">Useful Links</h6>
                         <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
-                        <p><a href="{{ route('about') }}" class="text-dark">About Workeassy</a></p>
-                        <p><a href="{{ route('gallery') }}" class="text-dark">Latest Media</a></p>
+                        <p><a href="{{ route('about') }}" class="text-white">About Workeassy</a></p>
+                        <p><a href="{{ route('gallery') }}" class="text-white">Latest Media</a></p>
                         @if($options->isNotEmpty())
                             @foreach($options as $row)
-                                <p><a href="{{ route('option', ['id' => base64_encode($row->id)]) }}" class="text-dark">{{ $row->title ?? '' }}</a></p>
+                                <p><a href="{{ route('option', ['id' => base64_encode($row->id)]) }}" class="text-white">{{ $row->title ?? '' }}</a></p>
                             @endforeach
                         @endif
                     </div>
@@ -95,24 +95,24 @@
                         <h6 class="text-uppercase fw-bold">Contact US</h6>
                         <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
                         <p>
-                            <a href="//{{ _settings('FACEBOOK') }}" class="facebook text-center-align" >
-                                <i class="fa fa-facebook-square fa-2x"></i>
-                            </a> &nbsp; Facebook
+                            <a href="//{{ _settings('FACEBOOK') }}" class="facebook text-center-align text-white">
+                                <i class="fa fa-facebook-square fa-2x"></i> &nbsp; Facebook
+                            </a>
                         </p>
                         <p>
-                            <a href="//{{ _settings('INSTAGRAM') }}" class="instagram text-center-align">
-                                <i class="fa fa-instagram fa-2x"></i>
-                            </a> &nbsp; Instagram
+                            <a href="//{{ _settings('INSTAGRAM') }}" class="instagram text-center-align text-white">
+                                <i class="fa fa-instagram fa-2x"></i> &nbsp; Instagram
+                            </a>
                         </p>
                         <p>
-                            <a href="//{{ _settings('YOUTUBE') }}" class="youtube text-center-align">
-                                <i class="fa fa-youtube fa-2x"></i>
-                            </a> &nbsp; Youtube
+                            <a href="//{{ _settings('YOUTUBE') }}" class="youtube text-center-align text-white">
+                                <i class="fa fa-youtube fa-2x"></i> &nbsp; Youtube
+                            </a>
                         </p>
                         <p>
-                            <a href="//{{ _settings('LINKEDIN') }}" class="linkedin text-center-align">
-                                <i class="fa fa-linkedin-square fa-2x"></i>
-                            </a> &nbsp; LinkedIn
+                            <a href="//{{ _settings('LINKEDIN') }}" class="linkedin text-center-align text-white">
+                                <i class="fa fa-linkedin-square fa-2x"></i> &nbsp; LinkedIn
+                            </a>
                         </p>
                     </div>
                 </div>
