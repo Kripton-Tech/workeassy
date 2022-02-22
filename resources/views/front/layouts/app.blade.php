@@ -23,6 +23,136 @@
             line-height: normal;
         }
     </style>
+    <style>
+        #float .label-container{
+            position:fixed;
+            bottom:48px;
+            right:105px;
+            display:table;
+            visibility: hidden;
+        }
+
+        #float .label-text{
+            color:#FFF;
+            background:rgba(51,51,51,0.5);
+            display:table-cell;
+            vertical-align:middle;
+            padding:10px;
+            border-radius:3px;
+        }
+
+        #float .label-arrow{
+            display:table-cell;
+            vertical-align:middle;
+            color:#333;
+            opacity:0.5;
+        }
+
+        #float .float{
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            bottom: 65px;
+            right: 16px;
+            background-color:#204D74;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            box-shadow: 2px 2px 3px #999;
+            z-index:1000;
+            animation: bot-to-top 2s ease-out;
+        }
+
+        #float .float:hover{
+            background-color:#51d8af;
+        }
+
+        #float ul{
+            position:fixed;
+            right:16px;
+            padding-bottom:20px;
+            bottom:80px;
+            z-index:100;
+        }
+
+        #float ul li{
+            list-style:none;
+            margin-bottom:10px;
+        }
+
+        #float ul li a{
+            background-color:#204D74;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            box-shadow: 2px 2px 3px #999;
+            width:40px;
+            height:40px;
+            display:block;
+        }
+
+        #float ul li a:hover{
+            background-color:#51d8af;
+        }
+
+        #float ul:hover{
+            visibility:visible!important;
+            opacity:1!important;
+        }
+
+        #float .my-float{
+            font-size: 18px;
+            margin-top: 12px;
+        }
+
+        #float a#menu-share + ul{
+            visibility: hidden;
+        }
+
+        #float a#menu-share:hover + ul{
+            visibility: visible;
+            animation: scale-in 0.5s;
+        }
+
+        #float a#menu-share i{
+            animation: rotate-in 0.5s;
+        }
+
+        #float a#menu-share:hover > i{
+            animation: rotate-out 0.5s;
+        }
+
+        @keyframes bot-to-top {
+            0%   {bottom:-40px}
+            50%  {bottom:40px}
+        }
+
+        @keyframes scale-in {
+            from {transform: scale(0);opacity: 0;}
+            to {transform: scale(1);opacity: 1;}
+        }
+
+        @keyframes rotate-in {
+            from {transform: rotate(0deg);}
+            to {transform: rotate(360deg);}
+        }
+
+        @keyframes rotate-out {
+            from {transform: rotate(360deg);}
+            to {transform: rotate(0deg);}
+        }
+    </style>
+    <style>
+        .contact-cancel{
+            background: #204D74;
+            border: 0;
+            border-radius: 3px;
+            padding: 10px 30px;
+            color: #fff;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -121,6 +251,65 @@
     </footer>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <div id="float">
+        <a href="#" class="float" id="menu-share">
+            <i class="fa fa-share my-float"></i>
+        </a>
+        <ul>
+            <li><a href="//api.whatsapp.com/send?phone={{ str_replace('-', '', str_replace(' ', '', str_replace('+', '', _settings('CONTACT_NUMBER')))) }}&text=Hi" target="_blank"><i class="fa fa-whatsapp my-float"></i></a></li>
+            <li><a href="tel:{{ str_replace('-', '', str_replace(' ', '', _settings('CONTACT_NUMBER'))) }}"><i class="fa fa-phone my-float"></i></a></li>
+            <li>
+                <a data-bs-toggle="modal" data-bs-target="#contactusModel">
+                    <i class="fa fa-envelope my-float"></i>
+                </a>
+            </li>
+            <li><a href="#"><i class="fa fa-twitter my-float"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter my-float"></i></a></li>
+        </ul>
+    </div>
+    <div class="modal fade floatModel" id="contactusModel" tabindex="-1" aria-labelledby="contactusModelLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactusModelLabel">Contact US</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="form" id="contact">
+                    <form action="{{ route('contactus') }}" method="post" role="form" class="php-email-form" name="contact" id="contact" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            @csrf
+                            @method('POST')
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="name" id="name" class="form-control input" placeholder="Your Name">
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <input type="email" name="email" id="email" class="form-control input" placeholder="Your Email">
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" name="subject" id="subject" class="form-control input" placeholder="Subject">
+                            </div>
+                            <div class="form-group mt-3">
+                                <textarea name="message" id="message" class="form-control input" rows="5" placeholder="Message"></textarea>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="form-submit" type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="button" class="contact-cancel" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @include('front.layouts.scripts')
 </body>

@@ -12,7 +12,7 @@ Contact US
 
 @section('content')
 <main id="main">
-<section id="contact">
+    <section id="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h2>Contact Us</h2>

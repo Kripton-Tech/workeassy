@@ -51,8 +51,15 @@
         headers: {'X-Requested-With': 'XMLHttpRequest'}
       })
       .then(response => {
-        if( response.ok ) {
-          return response.text()
+        if( response.ok ) {          
+          if($("#contactusModel").hasClass('show')) { 
+            let myModalEl = $('#contactusModel')
+            let modal = bootstrap.Modal.getInstance(myModalEl)
+            modal.hide() 
+          }
+          
+            return response.text()
+
         } else {
           throw new Error(`${response.statusText}`); 
         }
