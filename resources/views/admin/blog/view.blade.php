@@ -81,42 +81,8 @@ Blog View
 
 @section('scripts')
 <script src="{{ asset('backend/assets/dropify/dist/js/dropify.min.js') }}"></script>
-<script src="{{ asset('backend/assets/js/promise.min.js') }}"></script>
-<script src="{{ asset('backend/assets/js/sweetalert2.bundle.js') }}"></script>
-<!-- include summernote css/js -->
 <script src="{{ asset('backend/assets/summernote-0.8.18/summernote.js') }}"></script>
 
-<script>
-    $(document).ready(function(){
-        $('#body').summernote('disable');
-        $("#phone").keypress(function(e){
-            var keyCode = e.keyCode || e.which;
-            var $this = $(this);
-            //Regex for Valid Characters i.e. Numbers.
-            var regex = new RegExp("^[0-9\b]+$");
-
-            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-            // for 10 digit number only
-            if ($this.val().length > 9) {
-                e.preventDefault();
-                return false;
-            }
-            if (e.charCode < 54 && e.charCode > 47) {
-                if ($this.val().length == 0) {
-                    e.preventDefault();
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-            if (regex.test(str)) {
-                return true;
-            }
-            e.preventDefault();
-            return false;
-        });
-    });
-</script>
 <script>
     $(document).ready(function(){
         $('.dropify').dropify({
@@ -128,37 +94,6 @@ Blog View
         });
 
         var drEvent = $('.dropify').dropify();
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        var form = $('#form');
-        $('.kt-form__help').html('');
-        form.submit(function(e) {
-            $('.help-block').html('');
-            $('.m-form__help').html('');
-            $.ajax({
-                url: form.attr('action'),
-                type: form.attr('method'),
-                data: form.serialize(),
-                dataType: 'json',
-                async: false,
-                success: function(json) {
-                    return true;
-                },
-                error: function(json) {
-                    if (json.status === 422) {
-                        e.preventDefault();
-                        var errors_ = json.responseJSON;
-                        $('.kt-form__help').html('');
-                        $.each(errors_.errors, function(key, value) {
-                            $('.' + key).html(value);
-                        });
-                    }
-                }
-            });
-        });
     });
 </script>
 @endsection

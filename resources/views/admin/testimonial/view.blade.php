@@ -69,8 +69,6 @@
 
 @section('scripts')
 <script src="{{ asset('backend/assets/dropify/dist/js/dropify.min.js') }}"></script>
-<script src="{{ asset('backend/assets/js/promise.min.js') }}"></script>
-<script src="{{ asset('backend/assets/js/sweetalert2.bundle.js') }}"></script>
 
 <script>
     $(document).ready(function() {
