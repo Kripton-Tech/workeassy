@@ -11,6 +11,7 @@ use App\Models\Toward;
 use App\Models\About;
 use App\Models\Faq;
 use App\Models\Gallery;
+use App\Models\GalleryCategory;
 use App\Models\Testimonial;
 use App\Http\Requests\ContactRequest;
 use DB, Mail;
@@ -109,17 +110,21 @@ class RootController extends Controller{
     }
 
     public function gallery(Request $request){
-        $path = URL('uploads/gallery').'/';
-        $data = Gallery::select('id',
-                                    DB::Raw("CASE
-                                        WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
-                                        ELSE CONCAT("."'".$path."'".", 'default.png')
-                                    END as image")
-                                )
-                                ->where(['status' => 'active'])
-                                ->get();
+        $categories = GalleryCategory::select('id', 'title')->where(['status' => 'active'])->get();
 
-        return view('front.gallery')->with(['data' => $data]);
+        $path = URL('uploads/gallery').'/';
+        $data = DB::table('galleries as g')
+                    ->select('g.id', 'g.category_id', 'gc.title as title',
+                                DB::Raw("CASE
+                                    WHEN ".'g.image'." != '' THEN CONCAT("."'".$path."'".", ".'g.image'.")
+                                    ELSE CONCAT("."'".$path."'".", 'default.png')
+                                END as image")
+                            )
+                    ->leftjoin('galleries_categories as gc', 'gc.id', 'g.category_id')
+                    ->where(['g.status' => 'active'])
+                    ->get();
+
+        return view('front.gallery')->with(['categories' => $categories, 'data' => $data]);
     }
 
     public function faq(Request $request){
