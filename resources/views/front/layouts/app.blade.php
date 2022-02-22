@@ -22,6 +22,10 @@
             vertical-align: middle;
             line-height: normal;
         }
+
+        .back-to-top{
+            background-color:#e7c850;
+        }
     </style>
     <style>
         #float .label-container{
@@ -54,7 +58,7 @@
             height: 40px;
             bottom: 65px;
             right: 16px;
-            background-color:#204D74;
+            background-color:#e7c850;
             color:#FFF;
             border-radius:50px;
             text-align:center;
@@ -81,7 +85,7 @@
         }
 
         #float ul li a{
-            background-color:#204D74;
+            background-color:#e7c850;
             color:#FFF;
             border-radius:50px;
             text-align:center;

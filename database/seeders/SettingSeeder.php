@@ -35,11 +35,11 @@ class SettingSeeder extends Seeder{
             'MAIL_MAILER' => 'smtp',
             'MAIL_HOST' => 'mail.kriptontech.com',
             'MAIL_PORT' => '26',
-            'MAIL_USERNAME' => 'info@kriptontech.com',
-            'MAIL_PASSWORD' => 'Info@kriptontech123',
+            'MAIL_USERNAME' => 'test@kriptontech.com',
+            'MAIL_PASSWORD' => 'Test@kriptontech123',
             'MAIL_ENCRYPTION' => 'tls',
-            'MAIL_FROM_ADDRESS' => 'info@kriptontech.com',
-            'MAIL_FROM_NAME' => 'Kriptontech Projects'
+            'MAIL_FROM_ADDRESS' => 'test@kriptontech.com',
+            'MAIL_FROM_NAME' => 'Work Easy'
         ];
 
         foreach($mails as $key => $value){
