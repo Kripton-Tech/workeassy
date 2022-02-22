@@ -257,7 +257,7 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <div id="float">
-        <a href="#" class="float" id="menu-share">
+        <a href="javascript:void(0)" class="float" id="menu-share">
             <i class="fa fa-share my-float"></i>
         </a>
         <ul>
