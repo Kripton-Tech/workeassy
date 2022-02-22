@@ -338,6 +338,22 @@
             @endif
         </div>
     </section>
+    <section id="clients">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Clients</h2>
+            </div>
+            <div class="clients-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper align-items-center">
+                    @for($i = 1; $i <= 8; $i++)
+                        <div class="swiper-slide">
+                            <img src='{{ asset("frontend/img/clients/client-$i.png") }}' class="img-fluid" alt="client-{{ $i }}">
+                        </div>
+                    @endfor
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="testimonial">
         <div class="container" data-aos="fade-up">
             <div class="section-header text-center">
