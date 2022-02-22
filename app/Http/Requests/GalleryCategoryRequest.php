@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GalleryRequest extends FormRequest{
+class GalleryCategoryRequest extends FormRequest{
     public function authorize(){
         return true;
     }
@@ -12,21 +12,18 @@ class GalleryRequest extends FormRequest{
     public function rules(){
         if($this->method() == 'PATCH'){
             return [
-                'category_id' => 'required'
+                'title' => 'required'
             ];
         }else{
             return [
-                'category_id' => 'required',
-                'image' => 'required|mimes:jpg,jpeg,png'
+                'title' => 'required'
             ];
         }
     }
 
     public function messages(){
         return [
-            'category_id.required' => 'Please select category',
-            'image.required' => 'Please select image',
-            'image.mimes' => 'Please select jpg, jpeg or png image'
+            'title.required' => 'Please enter title'
         ];
     }
 }

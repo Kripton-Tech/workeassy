@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Models\GalleryCategory;
 use App\Http\Requests\GalleryRequest;
 use Auth, DB, Mail, Validator, File, DataTables;
 
@@ -14,14 +15,17 @@ class GalleryController extends Controller{
             if($request->ajax()){
                 $path = URL('/uploads/gallery/').'/';
 
-                $data = Gallery::select('id', 
+                $data = DB::table('galleries as g')
+                                ->select('g.id', 
                                         DB::Raw("CASE
-                                            WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
+                                            WHEN ".'g.image'." != '' THEN CONCAT("."'".$path."'".", ".'g.image'.")
                                             ELSE 'default.png'
                                         END as image"),
-                                        'status'
+                                        'g.status',
+                                        'gc.title as category'
                                     )
-                                ->orderBy('id', 'desc')
+                                ->leftjoin('galleries_categories as gc', 'gc.id', 'g.category_id')
+                                ->orderBy('g.id', 'desc')
                                 ->get();
 
                 return Datatables::of($data)
@@ -69,7 +73,8 @@ class GalleryController extends Controller{
 
     /** create */
         public function create(Request $request){
-            return view('admin.gallery.create');
+            $categories = GalleryCategory::select('id', 'title')->where(['status' => 'active'])->get();
+            return view('admin.gallery.create')->with(['categories' => $categories]);
         }
     /** create */
 
@@ -79,6 +84,7 @@ class GalleryController extends Controller{
 
             if(!empty($request->all())){
                 $crud = [
+                    'category_id' => $request->category_id,
                     'created_at' => date('Y-m-d H:i:s'),
                     'created_by' => auth()->user()->id,
                     'updated_at' => date('Y-m-d H:i:s'),
@@ -126,16 +132,19 @@ class GalleryController extends Controller{
             $id = base64_decode($id);
             $path = URL('/uploads/gallery/').'/';
 
-            $data = Gallery::select('id',
-                                        DB::Raw("CASE
-                                            WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
-                                            ELSE 'default.png'
-                                        END as image")
-                                    )
-                                    ->where(['id' => $id])->first();
+            $categories = GalleryCategory::select('id', 'title')->where(['status' => 'active'])->get();
+            $data = Gallery::select('id', 'category_id', 
+                                DB::Raw("CASE
+                                    WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
+                                    ELSE 'default.png'
+                                END as image"),
+                                'status'
+                            )
+                        ->where(['id' => $id])
+                        ->first();
             
             if($data)
-                return view('admin.gallery.view')->with(['data' => $data]);
+                return view('admin.gallery.view')->with(['categories' => $categories, 'data' => $data]);
             else
                 return redirect()->route('admin.gallery')->with('error', 'No data found');
         }
@@ -149,16 +158,19 @@ class GalleryController extends Controller{
             $id = base64_decode($id);
             $path = URL('/uploads/gallery/').'/';
 
-            $data = Gallery::select('id',
-                                        DB::Raw("CASE
-                                            WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
-                                            ELSE 'default.png'
-                                        END as image")
-                                    )
-                                    ->where(['id' => $id])->first();
+            $categories = GalleryCategory::select('id', 'title')->where(['status' => 'active'])->get();
+            $data = Gallery::select('id', 'category_id', 
+                                DB::Raw("CASE
+                                    WHEN ".'image'." != '' THEN CONCAT("."'".$path."'".", ".'image'.")
+                                    ELSE 'default.png'
+                                END as image"),
+                                'status'
+                            )
+                        ->where(['id' => $id])
+                        ->first();
             
             if($data)
-                return view('admin.gallery.edit')->with(['data' => $data]);
+                return view('admin.gallery.edit')->with(['categories' => $categories, 'data' => $data]);
             else
                 return redirect()->route('admin.gallery')->with('error', 'No data found');
         }
@@ -173,6 +185,7 @@ class GalleryController extends Controller{
                 $exst_record = Gallery::where(['id' => $id])->first();
 
                 $crud = [
+                    'category_id' => $request->category_id,
                     'updated_at' => date('Y-m-d H:i:s'),
                     'updated_by' => auth()->user()->id
                 ];

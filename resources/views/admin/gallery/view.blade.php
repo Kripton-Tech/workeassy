@@ -38,6 +38,18 @@
             <div class="card">
                 <div class="row m-2">
                     <div class="form-group col-sm-12">
+                        <label for="category_id">Category</label>
+                        <select name="category_id" id="category_id" class="form-control" readonly>
+                            <option value="">Select Category</option>
+                            @if($categories->isNotEmpty()) 
+                                @foreach($categories as $row)
+                                    <option value="{{ $row->id }}" @if(old('category_id', $data->category_id == $row->id)) selected @endif>{{ $row->title }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                        <span class="kt-form__help error category_id"></span>
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="image">Image</label>
                         <input type="file" name="image" class="form-control dropify" placeholder="Plese select image" data-show-remove="false" data-height="200" data-max-file-size="3M" data-show-errors="true" data-allowed-file-extensions="jpg png jpeg JPG PNG JPEG" data-max-file-size-preview="3M" data-default-file="{{ $data->image }}" />
                         <span class="kt-form__help error image"></span>

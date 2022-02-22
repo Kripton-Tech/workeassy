@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder{
             AboutSeeder::class,
             FaqSeeder::class,
             WorkspaceSeeder::class,
+            GalleryCategorySeeder::class,
             GallerySeeder::class,
             CategorySeeder::class,
             BlogSeeder::class,

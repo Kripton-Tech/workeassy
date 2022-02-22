@@ -128,6 +128,16 @@ Route::group(['middleware' => ['prevent-back-history', 'mail-service'], 'prefix'
             Route::post('workspace/change-status', 'WorkspaceController@change_status')->name('workspace.change.status');
         /** workspace */
         
+        /** gallery-category */
+            Route::any('galleries-category', 'GalleryCategoryController@index')->name('galleries-category');
+            Route::get('galleries-category/create', 'GalleryCategoryController@create')->name('galleries-category.create');
+            Route::post('galleries-category/insert', 'GalleryCategoryController@insert')->name('galleries-category.insert');
+            Route::get('galleries-category/view/{id?}', 'GalleryCategoryController@view')->name('galleries-category.view');
+            Route::get('galleries-category/edit/{id?}', 'GalleryCategoryController@edit')->name('galleries-category.edit');
+            Route::patch('galleries-category/update', 'GalleryCategoryController@update')->name('galleries-category.update');
+            Route::post('galleries-category/change-status', 'GalleryCategoryController@change_status')->name('galleries-category.change.status');
+        /** galleries-category */
+
         /** gallery */
             Route::any('gallery', 'GalleryController@index')->name('gallery');
             Route::get('gallery/create', 'GalleryController@create')->name('gallery.create');

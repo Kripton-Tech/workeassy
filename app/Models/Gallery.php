@@ -9,5 +9,5 @@ class Gallery extends Model{
     use HasFactory;
     protected $table = 'galleries';
 
-    protected $fillable = ['image', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    protected $fillable = ['category_id', 'image', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
 }

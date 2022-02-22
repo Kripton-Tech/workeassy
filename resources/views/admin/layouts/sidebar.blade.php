@@ -32,11 +32,27 @@
                         <span class="hide-menu">Sliders</span>
                     </a>
                 </li>
-                <li class="sidebar-item @route('admin.gallery*') selected @endroute">
-                    <a class="sidebar-link @route('admin.gallery*') active @endroute" href="{{ route('admin.gallery') }}" aria-expanded="false">
-                        <i class="fas fa-camera"></i>
+                <li class="sidebar-item @route('admin.gallery*') selected @endroute @route('admin.galleries-category*') selected @endroute"> 
+                    <a class="sidebar-link has-arrow @route('admin.gallery*') active @endroute" href="javascript:void(0)" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box feather-icon">
+                            <path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"></path>
+                            <polyline points="2.32 6.16 12 11 21.68 6.16"></polyline>
+                            <line x1="12" y1="22.76" x2="12" y2="11"></line>
+                        </svg>
                         <span class="hide-menu">Galleries</span>
                     </a>
+                    <ul aria-expanded="false" class="collapse first-level base-level-line">
+                        <li class="sidebar-item @route('admin.galleries-category*') active @endroute">
+                            <a href="{{ route('admin.galleries-category') }}" class="sidebar-link">
+                                <span class="hide-menu"> Categories </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item @route('admin.gallery*') active @endroute">
+                            <a href="{{ route('admin.gallery') }}" class="sidebar-link">
+                                <span class="hide-menu"> Galleries </span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="sidebar-item @route('admin.toward*') selected @endroute">
                     <a class="sidebar-link @route('admin.toward*') active @endroute" href="{{ route('admin.toward') }}" aria-expanded="false">

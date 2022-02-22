@@ -4,7 +4,7 @@
 @endsection
 
 @section('title')
-    Galleries
+    Gallery Categories
 @endsection
 
 @section('styles')
@@ -14,12 +14,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Galleries</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Gallery Categories</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.gallery') }}" class="text-muted">Galleries</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.galleries-category') }}" class="text-muted">Gallery Categories</a></li>
                         <li class="breadcrumb-item text-muted active" aria-current="page">List</li>
                     </ol>
                 </nav>
@@ -27,7 +27,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
-                <a href="{{ route('admin.gallery.create') }}" class="btn waves-effect waves-light btn-rounded btn-outline-primary mb-3 ml-3">Add</a>
+                <a href="{{ route('admin.galleries-category.create') }}" class="btn waves-effect waves-light btn-rounded btn-outline-primary mb-3 ml-3">Add</a>
             </div>
         </div>
     </div>
@@ -40,8 +40,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Category</th>
-                            <th>Image</th>
+                            <th>Title</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -81,7 +80,7 @@
                     // lengthChange: false,
 
                     "ajax":{
-                        "url": "{{ route('admin.gallery') }}",
+                        "url": "{{ route('admin.galleries-category') }}",
                         "type": "POST",
                         "dataType": "json",
                         "data":{
@@ -99,12 +98,8 @@
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'category',
-                            name: 'category'
-                        },
-                        {
-                            data: 'image',
-                            name: 'image'
+                            data: 'title',
+                            name: 'title'
                         },
                         {
                             data: 'action',
@@ -123,7 +118,7 @@
 
             if (confirm(msg)) {
                 $.ajax({
-                    "url": "{!! route('admin.gallery.change.status') !!}",
+                    "url": "{!! route('admin.galleries-category.change.status') !!}",
                     "dataType": "json",
                     "type": "POST",
                     "data":{

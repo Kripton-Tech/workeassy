@@ -13,7 +13,9 @@ class GallerySeeder extends Seeder{
             File::makeDirectory($file_to_upload, 0777, true, true);
 
         for($i=1; $i<=6; $i++){
+            $loop = rand(1, 4);
             Gallery::create([
+                'category_id' => $loop,
                 'image' => "$i.jpg",
                 'status' => 'active',
                 'created_at' => date('Y-m-d H:i:s'),
