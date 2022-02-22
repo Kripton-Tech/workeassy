@@ -67,92 +67,176 @@
     </style>
 
     <style>
-        #testimonial .card-main {
-            padding: 50px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px 0px #283593
+        @import url("https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap");
+        #testimonial .content-wrapper {
+            height: 100%;
+            width: 70%;
+            max-width: 100rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 5rem;
         }
-
-        #testimonial .card-0 {
-            color: #fff;
-            background-color: #0056b3;
+        #testimonial h1 {
+            margin-bottom: calc(0.7rem + 0.5vmin);
+            font-size: calc(2.3rem + 1vmin);
+        }
+        #testimonial .blue-line {
+            height: 0.3rem;
+            width: 6rem;
+            background-color: rgb(79, 143, 226);
+            margin-bottom: calc(3rem + 2vmin);
+        }
+        #testimonial .wrapper-for-arrows {
             position: relative;
-            margin-left: 70px;
-            border-radius: 10px;
-            min-height: 312px
+            width: 70%;
+            border-radius: 2rem;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
         }
-
-        #testimonial .carousel-indicators li {
-            cursor: pointer;
-            border-radius: 50% !important;
-            width: 10px;
-            height: 10px
+        #testimonial .review-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: calc(2rem + 1vmin);
+            width: 100%;
         }
-
-        #testimonial .profile {
-            color: #000;
-            background-color: #51d8af;
+        #testimonial #imgDiv {
+            border-radius: 50%;
+            width: calc(6rem + 4vmin);
+            height: calc(6rem + 4vmin);
+            position: relative;
+            box-shadow: 5px -3px rgb(79, 143, 226);
+            background-size: cover;
+            margin-bottom: calc(0.7rem + 0.5vmin);
+        }
+        #testimonial .chicken {
+            background-image: url("https://media0.giphy.com/media/A8Cdznswn5vnG/200w.gif?cid=790b7611e8c5980ee7141bc18ec12c49962b871eb404ba5b&rid=200w.gif&ct=s");
+            width: 200px;
+            height: 250px;
             position: absolute;
-            left: -70px;
-            top: 17%;
-            border-radius: 8px;
-            border-top-left-radius: 0px;
-            border-bottom-right-radius: 0px
+            top: 12%;
+        }
+        #testimonial #imgDiv::after {
+            content: "''";
+            font-size: calc(2rem + 2vmin);
+            font-family: sans-serif;
+            line-height: 150%;
+            color: #fff;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background-color: rgb(79, 143, 226);
+            position: absolute;
+            top: 10%;
+            left: -10%;
+            width: calc(2rem + 2vmin);
+            height: calc(2rem + 2vmin);
+        }
+        #testimonial #personName {
+            margin-bottom: calc(0.7rem + 0.5vmin);
+            font-size: calc(1rem + 0.5vmin);
+            letter-spacing: calc(0.1rem + 0.1vmin);
+            font-weight: bold;
+        }
+        #testimonial #profession {
+            font-size: calc(0.8rem + 0.3vmin);
+            margin-bottom: calc(0.7rem + 0.5vmin);
+            color: rgb(79, 143, 226);
+        }
+        #testimonial #description {
+            font-size: calc(0.8rem + 0.3vmin);
+            width: 70%;
+            max-width: 40rem;
+            text-align: center;
+            margin-bottom: calc(1.4rem + 1vmin);
+            color: rgb(92, 92, 92);
+            line-height: 2rem;
+        }
+        #testimonial .arrow-wrap {
+            position: absolute;
+            top: 50%;
+        }
+        #testimonial .arrow {
+            width: calc(1.4rem + 0.6vmin);
+            height: calc(1.4rem + 0.6vmin);
+            border: solid rgb(79, 143, 226);
+            border-width: 0 calc(0.5rem + 0.2vmin) calc(0.5rem + 0.2vmin) 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #testimonial .arrow:hover {
+            transition: 0.3s;
+            transform: scale(1.15);
+        }
+        #testimonial .left-arrow-wrap {
+            left: 5%;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+        #testimonial .right-arrow-wrap {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            right: 5%;
+        }
+        #testimonial .surprise-me-btn {
+            border: 2px solid rgb(79, 143, 226);
+            background-color: rgb(224, 238, 255);
+            color: rgb(79, 143, 226);
+            border-radius: 2rem;
+            padding: calc(0.5rem + 0.2vmin) 0;
+            width: calc(7rem + 5vmin);
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+            margin-bottom: calc(1.4rem + 1vmin);
+        }
+        #testimonial .surprise-me-btn:hover {
+            transition: background-color 0.3s, transform 0.3s;
+            background-color: rgb(255, 255, 255);
+            transform: rotate(5deg);
+        }
+        #testimonial .move-head {
+            animation: moveHead 1.55s infinite;
+            animation-delay: -0.8s;
+        }
+        #testimonial .hide-chicken-btn {
+            border: 2px solid rgb(226, 89, 79);
+            background-color: rgb(255, 224, 224);
+            color: rgb(226, 79, 79);
+            border-radius: 2rem;
+            padding: calc(0.5rem + 0.2vmin) 0;
+            width: calc(10rem + 5vmin);
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+            margin-bottom: calc(1.4rem + 1vmin);
+        }
+        #testimonial .hide-chicken-btn:hover {
+            transition: background-color 0.3s, transform 0.3s;
+            background-color: rgb(255, 255, 255);
+            transform: rotate(5deg);
+        }
+        @keyframes moveHead {
+            0% {
+            }
+            25% {
+                transform: translate(0.5rem, 1rem) rotate(5deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(-5deg);
+            }
+        }
+        @media screen and (max-width: 900px) {
+            #testimonial .content-wrapper {
+                width: 100%;
+            }
         }
 
-        #testimonial .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-bottom-left-radius: 10px;
-            border-top-right-radius: 10px
-        }
-
-        #testimonial .open-quotes {
-            margin-left: 130px;
-            margin-top: 100px
-        }
-
-        #testimonial .content {
-            margin-left: 150px;
-            margin-right: 80px
-        }
-
-        #testimonial .close-quotes {
-            margin-bottom: 100px;
-            margin-right: 60px
-        }
-
-        @media screen and (max-width: 600px) {
-            #testimonial .card-main {
-                padding: 20px 10px
-            }
-
-            #testimonial .card-0 {
-                min-height: 432px
-            }
-
-            #testimonial .profile {
-                top: 24%
-            }
-
-            #testimonial .profile-pic {
-                width: 90px;
-                height: 90px
-            }
-
-            #testimonial .open-quotes {
-                margin-left: 100px
-            }
-
-            #testimonial .content {
-                margin-left: 120px;
-                margin-right: 50px
-            }
-
-            #testimonial .close-quotes {
-                margin-right: 30px
-            }
-        }
     </style>
 @endsection
 
@@ -256,47 +340,23 @@
     </section>
     <section id="testimonial">
         <div class="container" data-aos="fade-up">
-            <div class="section-header">
-               <h2>Testimonial</h2>
+            <div class="section-header text-center">
+                <h1>Our Reviews</h1>
             </div>
-            <div class="container-fluid m-0 p-0">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10 col-lg-12 col-xl-12">
-                        <div class="card card-main border-0 text-center">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    @if($testimonials->isNotEmpty())
-                                        @php $i = 0; @endphp
-                                        @foreach($testimonials as $row)
-                                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}"></li>
-                                            @php $i++; @endphp
-                                        @endforeach
-                                    @endif
-                                </ol>
-                                <div class="carousel-inner">
-                                    @if($testimonials->isNotEmpty())
-                                        @php $i = 0; @endphp
-                                        @foreach($testimonials as $row)
-                                            <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
-                                                <div class="card border-0 card-0">
-                                                    <div class="card profile py-3 px-4">
-                                                        <div class="text-center"> 
-                                                            <img src="{{ $row->image }}" class="img-fluid profile-pic"> 
-                                                        </div>
-                                                        <h6 class="mb-0 mt-2">{{ $row->name }}</h6> 
-                                                        <small>{{ $row->title }}</small>
-                                                    </div> 
-                                                    <img class="img-fluid open-quotes" src="{{ asset('frontend/img/left-quote.png') }}" width="20" height="20">
-                                                    <p class="content mb-0">{{ $row->description }}</p> 
-                                                    <img class="img-fluid close-quotes ml-auto" src="{{ asset('frontend/img/right-quote.png') }}" width="20" height="20">
-                                                </div>
-                                            </div>
-                                        @php $i++; @endphp
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+            <div class="d-flex justify-content-center">
+                <div class="wrapper-for-arrows">
+                    <div style="opacity: 0;" class="chicken"></div>
+                    <div id="reviewWrap" class="review-wrap">
+                        <div id="imgDiv" class=""></div>
+                        <div id="personName"></div>
+                        <div id="profession"></div>
+                        <div id="description"></div>
+                    </div>
+                    <div class="left-arrow-wrap arrow-wrap">
+                        <div class="arrow" id="leftArrow"></div>
+                    </div>
+                    <div class="right-arrow-wrap arrow-wrap">
+                        <div class="arrow" id="rightArrow"></div>
                     </div>
                 </div>
             </div>
@@ -362,9 +422,120 @@
         </div>
     </section>
 </main>
+<?php
+    $peoples = [];
+    $testimonials_i = 0;
+    
+    if($testimonials->isNotEmpty()){
+        foreach($testimonials as $row){
+            $object = [
+                'photo' => 'url("'.$row->image.'")', 
+                'name' => $row->name, 
+                'profession' => $row->title, 
+                'description' => $row->description
+            ];
+
+            $peoples[] = $object;
+            $testimonials_i++;
+        }
+    }
+?>
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('frontend/js/gsap.3.9.1.js') }}"></script>
+    
+    <script>
+        const reviewWrap = document.getElementById("reviewWrap");
+        const leftArrow = document.getElementById("leftArrow");
+        const rightArrow = document.getElementById("rightArrow");
+        const imgDiv = document.getElementById("imgDiv");
+        const personName = document.getElementById("personName");
+        const profession = document.getElementById("profession");
+        const description = document.getElementById("description");
+
+        let people = <?php echo json_encode($peoples); ?>;
+        
+        imgDiv.style.backgroundImage = people[0].photo;
+        personName.innerText = people[0].name;
+        profession.innerText = people[0].profession;
+        description.innerText = people[0].description;
+        let currentPerson = 0;
+
+        //Select the side where you want to slide
+        function slide(whichSide, personNumber) {
+            let reviewWrapWidth = reviewWrap.offsetWidth + "px";
+            let descriptionHeight = description.offsetHeight + "px";
+            //(+ or -)
+            let side1symbol = whichSide === "left" ? "" : "-";
+            let side2symbol = whichSide === "left" ? "-" : "";
+
+            let tl = gsap.timeline();
+
+            tl.to(reviewWrap, {
+                duration: 0.4,
+                opacity: 0,
+                translateX: `${side1symbol + reviewWrapWidth}`
+            });
+
+            tl.to(reviewWrap, {
+                duration: 0,
+                translateX: `${side2symbol + reviewWrapWidth}`
+            });
+
+            setTimeout(() => {
+                imgDiv.style.backgroundImage = people[personNumber].photo;
+            }, 400);
+            setTimeout(() => {
+                description.style.height = descriptionHeight;
+            }, 400);
+            setTimeout(() => {
+                personName.innerText = people[personNumber].name;
+            }, 400);
+            setTimeout(() => {
+                profession.innerText = people[personNumber].profession;
+            }, 400);
+            setTimeout(() => {
+                description.innerText = people[personNumber].description;
+            }, 400);
+
+            tl.to(reviewWrap, {
+                duration: 0.4,
+                opacity: 1,
+                translateX: 0
+            });
+        }
+
+        function setNextCardLeft() {
+            if (currentPerson === "{{ $testimonials_i - 1 }}") {
+                currentPerson = 0;
+                slide("left", currentPerson);
+            } else {
+                currentPerson++;
+            }
+
+            slide("left", currentPerson);
+        }
+
+        function setNextCardRight() {
+            if (currentPerson === 0) {
+                currentPerson = "{{ $testimonials_i - 1 }}";
+                slide("right", currentPerson);
+            } else {
+                currentPerson--;
+            }
+
+            slide("right", currentPerson);
+        }
+
+        leftArrow.addEventListener("click", setNextCardLeft);
+        rightArrow.addEventListener("click", setNextCardRight);
+
+        window.addEventListener("resize", () => {
+            description.style.height = "100%";
+        });
+    </script>
+
     <script>
         var myCarousel = document.querySelector('#carousel')
         var carousel = new bootstrap.Carousel(myCarousel, {
