@@ -264,8 +264,6 @@
                     <i class="fa fa-envelope my-float"></i>
                 </a>
             </li>
-            <li><a href="#"><i class="fa fa-twitter my-float"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter my-float"></i></a></li>
         </ul>
     </div>
     <div class="modal fade floatModel" id="contactusModel" tabindex="-1" aria-labelledby="contactusModelLabel" aria-hidden="true">
