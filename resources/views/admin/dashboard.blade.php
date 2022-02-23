@@ -17,6 +17,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
+                <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning {{ auth()->user()->name }}!</h3>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
@@ -27,10 +28,10 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
         <div class="card-group">
             <div class="card border-right">
-                <!-- <a href="">
+                <a href="">
                     <div class="card-body">
                         <div class="d-flex d-lg-flex d-md-block align-items-center justify-content-center">
                             <div>
@@ -41,10 +42,10 @@
                             </div>
                         </div>
                     </div>
-                </a> -->
+                </a>
             </div>
             <div class="card border-right">
-                <!-- <a href="">
+                <a href="">
                     <div class="card-body">
                         <div class="d-flex d-lg-flex d-md-block align-items-center justify-content-center">
                             <div>
@@ -55,7 +56,52 @@
                             </div>
                         </div>
                     </div>
-                </a> -->
+                </a>
+            </div>
+        </div>
+    </div> -->
+    <div class="container-fluid row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <h4 class="card-title">Unread Contactus</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table no-wrap v-middle mb-0">
+                            <thead>
+                                <tr class="border-0">
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Sr. No</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Name</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Email</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Subject</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($data['contactus']->isNotEmpty())
+                                    @php $i = 1; @endphp
+                                    @foreach($data['contactus'] as $row)
+                                        <tr>
+                                            <td class="border-top-0">{{ $i }}</td>
+                                            <td class="border-top-0">{{ $row->name }}</td>
+                                            <td class="border-top-0">{{ $row->email }}</td>
+                                            <td class="border-top-0">{{ $row->subject }}</td>
+                                            <td class="border-top-0">{{ $row->message }}</td>
+                                        </tr>
+                                        @php $i++; @endphp
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5">
+                                            <h4 class="text-center">No Unread Contact</h4>
+                                        </td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

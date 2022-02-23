@@ -16,7 +16,8 @@ class SettingSeeder extends Seeder{
             'CONTACT_EMAIL' => 'connect@workeasy.in',
             'MAIN_CONTACT_EMAIL' => 'connect@workeasy.in',
             'CONTACT_ADDRESS' => 'Sardar Nagar, Rajkot',
-            'MAIN_CONTACT_ADDRESS' => 'Sardar Nagar, Rajkot'
+            'MAIN_CONTACT_ADDRESS' => 'Sardar Nagar, Rajkot',
+            'LOCATION' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118147.81619372782!2d70.75125548548762!3d22.27347193434806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959c98ac71cdf0f%3A0x76dd15cfbe93ad3b!2sRajkot%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1645610128275!5m2!1sen!2sin'
         ];
 
         foreach($general as $key => $value){
