@@ -156,7 +156,7 @@ class RootController extends Controller{
         $process = Contact::insert($input);
         
         if($process){
-            $to = 'psrn.hardik@gmail.com';
+            $to = _settings('MAIL_FROM_ADDRESS');
 
             $data = [
                 'name' => $request->name,
