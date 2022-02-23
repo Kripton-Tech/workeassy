@@ -17,7 +17,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
-                <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning {{ auth()->user()->name }}!</h3>
+                <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Hey! {{ auth()->user()->name }}!</h3>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
