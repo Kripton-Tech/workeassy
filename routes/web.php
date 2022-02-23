@@ -41,7 +41,7 @@ Route::get('command:seed', function() {
     return "Database seeding generated";
 });
 
-Route::group(['namespace' => 'Front'], function(){
+Route::group(['namespace' => 'Front', 'middleware' => 'mail-service'], function(){
     Route::get('/', 'RootController@index')->name('home'); 
     Route::get('about', 'RootController@about')->name('about'); 
     Route::get('option/{id?}', 'RootController@option')->name('option'); 

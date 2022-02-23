@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\ContactUs;
 use App\Models\Contact;
 use App\Models\Slider;
 use App\Models\Workspace;
@@ -154,9 +155,27 @@ class RootController extends Controller{
 
         $process = Contact::insert($input);
         
-        if($process)
-            return response('OK');
-        else
+        if($process){
+            $to = 'psrn.hardik@gmail.com';
+
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email, 
+                'subject' => $request->subject, 
+                'message' => $request->message, 
+                'from_email' => _settings('MAIL_FROM_ADDRESS'),
+                'logo' => _logo()
+            ];
+
+            try{
+                Mail::to($to)->send(new ContactUs($data));
+
+                return response('OK');
+            }catch(\Exception $e){
+                return response('OK');
+            }
+        }else{
             return response('NO');
+        }
     }
 }
