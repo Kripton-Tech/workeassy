@@ -50,6 +50,9 @@ Route::group(['namespace' => 'Front', 'middleware' => 'mail-service'], function(
     Route::get('contact', 'RootController@contact')->name('contact'); 
     Route::post('contactus', 'RootController@contactus')->name('contactus'); 
     Route::get('learneasy', 'RootController@learneasy')->name('learneasy');
+
+    Route::get('blogs', 'RootController@blogs')->name('blogs');
+    Route::get('blog/{id?}', 'RootController@blog')->name('blog');
 });
 
 Route::group(['middleware' => ['prevent-back-history', 'mail-service'], 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){

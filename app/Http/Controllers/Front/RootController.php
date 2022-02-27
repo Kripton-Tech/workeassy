@@ -178,4 +178,12 @@ class RootController extends Controller{
             return response('NO');
         }
     }
+
+    public function blogs(Request $request){
+        return view('front.blogs');
+    }
+
+    public function blog(Request $request, $id=''){
+        return view('front.blog');
+    }
 }
